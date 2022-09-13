@@ -1,0 +1,18 @@
+{
+  "namespace": "com.inditex.mecc.mecpsept.events.v1",
+  "type": "record",
+  "name": "ComingSoonAvailabilityUpdatedEnvelope",
+  "subject": "meccano.mecpsept.coming-soon-availability-updated.v1-value",
+  "fields": [
+    {
+      "name": "metadata",
+      "doc": "Metadata object provided by Inditex to include on envelopes",
+      "type": "com.inditex.aqsw.pipe.v1.Metadata"
+    },
+    {
+      "name": "payload",
+      "doc": "Event triggered by Coming soon availability changes",
+      "type": "ComingSoonAvailabilityUpdated"
+    }
+  ]
+}

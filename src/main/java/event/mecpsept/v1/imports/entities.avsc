@@ -1,0 +1,35 @@
+[
+  {
+    "namespace": "com.inditex.mecc.mecpsept.events.v1",
+    "type": "record",
+    "name": "ComingSoonAvailabilityUpdated",
+    "fields": [
+      {
+        "name": "storeId",
+        "type": "int",
+        "doc": "The identifier of the store"
+      },
+      {
+        "name": "brandId",
+        "type": "int",
+        "doc": "The identifier of the brand"
+      },
+      {
+        "name": "productItemReference",
+        "type": "string",
+        "doc": " Product item reference without season"
+      },
+      {
+        "name": "updatedAt",
+        "type": "long",
+        "logicalType": "timestamp-millis",
+        "doc": " Modification date "
+      },
+      {
+        "name": "available",
+        "type": "boolean",
+        "doc": "Whether or not a sku has coming soon availability"
+      }
+    ]
+  }
+]

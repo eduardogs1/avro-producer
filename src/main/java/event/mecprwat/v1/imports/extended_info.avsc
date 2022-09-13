@@ -1,0 +1,509 @@
+[
+  {
+    "name": "I18NText",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds a text and its locale ISO code.",
+    "fields": [
+      {"name": "iso_code", "type": "string", "doc": "Locale ISO code."},
+      {"name": "text", "type": "string", "doc": "Internationalized text."}
+    ]
+  },
+  {
+    "name": "Composition",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds an array with composition's info for all available languages on a given store and filtered by affected color_ids.",
+    "type": "record",
+    "fields": [
+      {
+        "name": "labels",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        },
+        "doc": "Internationalized composition's info json."
+      },
+      {
+        "name": "color_ids", 
+        "type": {
+          "type": "array",
+          "items": "string"
+        },
+        "doc": "Identifiers of colors affected."
+      }
+    ]
+  },
+  {
+    "name": "Tag",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds a tag (identifier and type) translated in all available languages.",
+    "type": "record",
+    "fields": [
+      {
+        "name": "name",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        },
+        "doc": "Internationalized tags."
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "doc": "Indicates the identifier of the tag C-SRA-PARKA, C-NNO-BASICO, C-SRA-ABRIGOS-TRENCH..."
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "doc": "Indicates the type of tag (XGENFILTER, XCATFILTER)."
+      }
+    ]
+  },
+  {
+    "name": "Care",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "type": "record",
+    "doc": "Holds data of a single care and the colors where this care is used.",
+    "fields": [
+      {"name": "care_id", "type": "long", "doc": "Care identifier."},
+      {"name": "name", "type": "string", "doc": "Defines the standard icon to represent the case."},
+      {"name": "care_type", "type": "long", "doc": "Care type identifier."},
+      {
+        "name": "descriptions",
+        "doc": "Contains internationalized care description.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      },
+      {
+        "name": "color_ids",
+        "type": {
+          "type": "array",
+          "items": "string"
+        },
+        "doc": "Identifiers of affected colors."
+      }
+    ]
+  },
+  {
+    "name": "Color",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds color information such names and identifier.",
+    "fields":  [
+      {"name": "color_id", "type": "string", "doc": "Color's identifier."},
+      {
+        "name": "color_names",
+        "doc": "Color's name in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      },
+      {
+        "name": "color_gammas",
+        "doc": "List of internationalized color' gammas, (e.g. yellows, blues, etc).",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Size",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds size's information.",
+    "type": "record",
+    "fields": [
+      {"name": "id", "type": "long", "doc": "Size's identifier."},
+      {
+        "name": "size_name",
+        "doc": "Size's name in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      },
+      {"name": "position", "type": "int", "doc": "Occupied position in the size list."},
+      {"name": "equivalent_id", "type": "int", "doc": "Equivalent to size identifier but support multiples sizes for the same sku."},
+      {"name": "is_longer", "type": "boolean", "doc": "[DEPRECATED - Use size_fit instead] Indicate if the size is longer than normal."},
+      {"name": "size_fit", "type": "string", "doc": "Indicate particularities about the size"},
+      {"name": "size_value", "type": ["null", "string"], "doc": "Indicates size value description", "default": null}
+    ]
+  },
+  {
+    "name": "SeoInfo",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds SEO information.",
+    "fields": [
+      {"name": "id", "type": "string", "doc": "SEO identifier."},
+      {
+        "name": "keywords",
+        "doc": "Optional list of internationalized SEO keywords.",
+        "type": ["null", {
+          "type": "array",
+          "items": "I18NText"
+        }]
+      }
+    ]
+  },
+  {
+    "name": "LabelType",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that represents a type of label.",
+    "type": "record",
+    "fields": [
+     {
+       "name": "id",
+       "type": "string",
+       "doc": "Label's type identifier."
+     }
+    ]
+  },
+  {
+    "name": "Label",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that represents a business label (for instance: new, ...) translated in all available languages.",
+    "type": "record",
+    "fields": [
+      {
+        "name": "name",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        },
+        "doc": "Internationalized label name."
+      },
+      {
+        "name": "type",
+        "type": "LabelType",
+        "doc": "Related label's type."
+      }
+    ]
+  },
+  {
+    "name": "ValuedAttribute",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that represents a valued attribute and, if translated, its translations.",
+    "type": "record",
+    "fields": [
+      {
+        "name": "name",
+        "type": ["null",{
+          "type": "array",
+          "items": "I18NText"
+        }],
+        "doc": "Internationalized attribute name.",
+        "default": null
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "doc": "Indicates the identifier of the attribute"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "doc": "Indicates the value of the attribute"
+      }
+    ]
+  },
+  {
+    "name": "ProductExtendedInfoChanged",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds the extended information that has changed for a Product. Products contains all associated colors and sizes.",
+    "type": "record",
+    "fields": [
+      {"name": "store_id", "type": "long", "doc": "Store's unique identifier."},
+      {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's unique identifier."},
+      {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+      {
+        "name": "name",
+        "doc": "Product's name in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "short_descriptions",
+        "doc": "Product's short description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "long_descriptions",
+        "doc": "Product's long description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "size_fit_descriptions",
+        "doc": "Product's description of particularities about the sizes in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "colors",
+        "doc": "List of colors for the given product.",
+        "type": {
+          "type": "array",
+          "items": {
+            "name": "ProductColor",
+             "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+             "type": "record",
+             "doc": "Class that holds color information such names and identifier.",
+             "fields":  [
+               {"name": "color_id", "type": "string", "doc": "Color's identifier."},
+               {
+                 "name": "color_names",
+                 "doc": "Color's name in a bunch of locales.",
+                 "type": {
+                   "type": "array",
+                   "items": "I18NText"
+                 }
+               },
+               {
+                 "name": "color_gammas",
+                 "doc": "List of internationalized color' gammas, (e.g. yellows, blues, etc).",
+                 "type": {
+                   "type": "array",
+                   "items": "I18NText"
+                 }
+               },
+               {
+                 "name": "sizes",
+                 "doc": "List of sizes for the given color.",
+                 "type": {
+                   "type": "array",
+                   "items": "Size"
+                 }
+               }
+             ]
+          }
+        }
+      },
+      {
+        "name": "compositions",
+        "doc": "List of internationalized composition descriptions by colors.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Composition"
+        }]
+      },
+      {
+        "name": "cares",
+        "doc": "List of internationalized cares by colors.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Care"
+        }]
+      },
+      { "name": "seo_info", "type": "SeoInfo", "doc": "Product's SEO information object." },
+      {
+        "name": "tags",
+        "doc": "List of internationalized tags.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Tag"
+        }]
+      },
+      {
+        "name": "labels",
+        "doc": "List of internationalized labels.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Label"
+        }]
+      },
+      {
+        "name": "marks",
+        "type": {
+          "type": "array",
+          "items": "string"
+         },
+         "doc": "Marks for the product: hasNoStockInStoresAvailable indicates that the stock page is not available"
+      },      
+      {
+        "name": "valued_attributes",
+        "doc": "List of valued_attributes of the product",
+        "type": ["null", {
+          "type": "array",
+          "items": "ValuedAttribute"
+        }],
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "SingleComponentExtendedInfoChanged",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds the extended information that has changed for a Single Component (aka Bundle of Color). Single components contains the same product with different color or styling.",
+    "type": "record",
+    "fields": [
+      {"name": "store_id", "type": "long", "doc": "Store's unique identifier."},
+      {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's unique identifier."},
+      {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+      {
+        "name": "name",
+        "doc": "Single Component's name in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      },
+      {
+        "name": "short_descriptions",
+        "doc": "Single Component's short description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "long_descriptions",
+        "doc": "Single Component's long description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "color",
+        "type": ["null", "Color"],
+        "doc": "Single component's color object."
+      },
+      {
+        "name": "seo_info", "type": "SeoInfo", "doc": "Product's SEO information object."
+      },
+      {
+        "name": "sizes",
+        "doc": "List of sizes.",
+        "type": {
+          "type": "array",
+          "items": "Size"
+        }
+      },
+      {
+        "name": "tags",
+        "doc": "List of internationalized tags.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Tag"
+        }]
+      },
+      {
+        "name": "labels",
+        "doc": "List of internationalized labels.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Label"
+        }]
+      },
+      {
+        "name": "marks",
+        "type": ["null",{
+          "type": "array",
+          "items": "string"
+         }],
+         "doc": "Marks for the single component (ZARA_SCENES...)",
+         "default": null
+      },
+      {
+        "name": "valued_attributes",
+        "doc": "List of valued_attributes of the single component",
+        "type": ["null", {
+          "type": "array",
+          "items": "ValuedAttribute"
+        }],
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "BundleComponentExtendedInfoChanged",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v1",
+    "doc": "Class that holds the extended information that has changed for a Bundle Component. Bundle components contain related products, such as in men suits, which are typically composed of trousers, shirt and jacket",
+    "type": "record",
+    "fields": [
+      {"name": "store_id", "type": "long", "doc": "Store's unique identifier."},
+      {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's unique identifier."},
+      {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+      {
+        "name": "name",
+        "doc": "Bundle Component's name in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+        }
+      },
+      {
+        "name": "short_descriptions",
+        "doc": "Bundle Component's short description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "long_descriptions",
+        "doc": "Bundle Component's long description in a bunch of locales.",
+        "type": {
+          "type": "array",
+          "items": "I18NText"
+          }
+      },
+      {
+        "name": "color",
+        "type": ["null", "Color"],
+        "doc": "Optional list of colors."
+      },
+      {
+        "name": "seo_info", "type": "SeoInfo", "doc": "Product's SEO information object."
+      },
+      {
+        "name": "tags",
+        "doc": "List of internationalized tags.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Tag"
+        }]
+      },
+      {
+        "name": "labels",
+        "doc": "List of internationalized labels.",
+        "type": ["null", {
+          "type": "array",
+          "items": "Label"
+        }]
+      },
+            {
+        "name": "marks",
+        "type": ["null",{
+          "type": "array",
+          "items": "string"
+         }],
+         "doc": "Marks for the commercial component",
+         "default": null
+      },
+      {
+        "name": "valued_attributes",
+        "doc": "List of valued_attributes of the commercial component",
+        "type": ["null", {
+          "type": "array",
+          "items": "ValuedAttribute"
+        }],
+        "default": null
+      }
+    ]
+  }
+]

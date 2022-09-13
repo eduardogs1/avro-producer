@@ -1,0 +1,206 @@
+[
+  {
+    "name": "ProductPriceReferenceType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds the reference info",
+    "fields": [
+      {
+        "name": "brand_id",
+        "type": "int",
+        "doc": "The master brand id"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "doc": "The 1 digit product type"
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "doc": "The 4 digits model"
+      },
+      {
+        "name": "quality",
+        "type": "string",
+        "doc": "The 3 digits quality"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "doc": "The 3 digits color"
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "doc": "The 3 digits size"
+      },
+      {
+        "name": "bar_code",
+        "type": "string",
+        "doc": "sku barcode without season"
+      }
+    ]
+  },
+  
+    {
+    "name": "EcomloadPromoInfoType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds the reference info",
+    "fields": [
+      {
+        "name": "ecomload_promo_name",
+        "type": "string",
+        "doc": "The promo name created by EcomLoad"
+      },
+      {
+        "name": "ecomload_promo_id",
+        "type": "long",
+        "doc": "The eomload promo id"
+      }
+    ]
+  },
+
+  {
+    "name": "ObservationType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds observatios/descriptions about a price",
+    "fields": [
+      {
+        "name": "description",
+        "type": "string",
+        "doc": "Description of the price info"
+      },
+      {
+        "name": "kind",
+        "type": {
+          "type": "enum",
+          "name": "KindTypeEnum",
+          "symbols": [
+            "REGULAR",
+            "SALES",
+            "EVENT"
+          ]
+        },
+        "doc": "Enum to catalog the price type"
+      },
+	   {
+        "name": "ecomload_promo_info",
+		"type" : [ "null", "EcomloadPromoInfoType" ],
+		"default": null,
+        "doc": "Ecomload promos data description"
+      }	  
+    ]
+  },
+  {
+    "name": "EcommerceTradePosInfoType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds the current ecommerce trade info",
+    "fields": [
+      {
+        "name": "tradeposcnId",
+        "type": "long",
+        "doc": "Internal ecommerce trade id"
+      },
+      {
+        "name": "memberId",
+        "type": "long",
+        "doc": "Internal member id"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "doc": "Internal ecommerce trade name"
+      }
+    ]
+  },
+  {
+    "name": "TimeLinePriceType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds the twinned type",
+    "fields": [
+      {
+        "name": "startDate",
+        "type": "long",
+        "doc": "The string ISO UTC for the price activation"
+      },
+      {
+        "name": "endDate",
+        "type": "long",
+        "doc": "The string ISO UTC for the price end date."
+      },
+      {
+        "name": "price",
+        "type": "double",
+        "doc": "The price amount"
+      },
+      {
+        "name": "comparePrice",
+        "type": "double",
+        "doc": "The amount of the compare price / previous price"
+      },
+      {
+        "name": "observation",
+        "type": "ObservationType",
+        "doc": "The Object for storing the observation details"
+      }
+    ]
+  },
+  {
+    "name": "SeasonLessProductPriceType",
+    "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+    "type": "record",
+    "doc": "Class that holds availability changes in a base product component.",
+    "fields": [
+      {
+        "name": "updated_at",
+        "type": "long",
+        "doc": "The strings ISO UTC of the update date"
+      },
+      {
+        "name": "reference",
+        "type": "ProductPriceReferenceType",
+        "doc": "The reference details of the article"
+      },
+      {
+        "name": "ecommerce_trade_pos_info",
+        "type": "EcommerceTradePosInfoType",
+        "doc": "Ecommerce trade por info"
+      },
+      {
+        "name": "country_iso",
+        "type": "string",
+        "doc": "The country ISO "
+      },
+      {
+        "name": "online_store_id",
+        "type": "int",
+        "doc": "The online store id"
+      },
+      {
+        "name": "online_store_Code",
+        "type": "string",
+        "doc": "Descripcion of the online store store"
+      },
+      {
+        "name": "currency_iso",
+        "type": "string",
+        "doc": "The currency iso"
+      },
+      {
+        "name": "time_line_prices",
+        "type": [
+          {
+            "type": "array",
+            "items": "TimeLinePriceType"
+          }
+        ],
+        "doc": "List of prices by utc date"
+      }
+    ]
+  }
+]

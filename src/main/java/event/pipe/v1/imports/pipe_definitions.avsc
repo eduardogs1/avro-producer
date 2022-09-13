@@ -1,0 +1,200 @@
+[
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1",
+        "type": "record",
+        "name": "Envelope",
+        "doc": "Data relative to the message container used to envelop the event",
+        "fields": [
+            {
+                "name": "name",
+                "type": "string",
+                "doc": "Name of the message container used. I.e. 'pipe-event'"
+            },
+            {
+                "name": "version",
+                "type": "string",
+                "doc": "Specific container version"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1",
+        "type": "record",
+        "name": "Classifier",
+        "doc": "Defines the identity of a message using a set of keys extracted from the message payload",
+        "fields": [
+            {
+                "name": "name",
+                "type": "string",
+                "doc": "Name of the classifier in order to make comparisons between events with the same classifier defined"
+            },
+            {
+                "name": "values",
+                "type": {"type": "array", "items": "string"},
+                "doc": "Ordered values that define the final classifier value"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1",
+        "type": "record",
+        "name": "Relationship",
+        "doc": "Represents a relationship between the message and a specific business entity",
+        "fields": [
+            {
+                "name": "name",
+                "type": "string",
+                "doc": "Unique name of the entity"
+            },
+            {	"name": "domain",
+                "type": "string",
+                "doc": "Functional domain. I.e. 'ECommerce'"
+            },
+            {	"name": "version",
+                "type": ["null", "string"], "default": null,
+                "doc": "Version of the entity definition"
+            },
+            {
+                "name": "type",
+                "type": {"type": "enum", "name": "RelationshipType", "symbols": ["createdBy","causes","dependsOn","hasA","partOf","memberOf"]},
+                "doc": "Specific type of the relationship between the event and the business entity"
+            },
+            {
+                "name": "data",
+                "type": ["null", {"type": "map", "values": "string"}], "default": null,
+                "doc": "Specific data of the related entity at the moment the event is triggered"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1.extensions",
+        "type": "record",
+        "name": "LifecycleExtension",
+        "doc": "Information about the transition represented by the event in the life cycle of a process model or artifact",
+        "fields": [
+            {
+                "name": "name",
+                "type": "string",
+                "doc": "Process model or artifact related to the event"
+            },
+            {
+                "name": "domain",
+                "type": ["null","string"],
+                "default": null,
+                "doc": "Domain of the process model or artifact related to the event"
+            },
+            {
+                "name": "instance",
+                "type": ["null", "string"],
+                "default": null,
+                "doc": "Specific instance of the process model or artifact, if it's known"
+            },
+            {
+                "name": "correlation",
+                "type": ["null", {"type": "map", "values": "string"}],
+                "default": null,
+                "doc": "Correlation identifiers between states of a flow. They will be defined for each functional case with the Data Architecture Analytics team."
+            },
+            {
+                "name": "transition",
+                "type": ["null", "string"],
+                "default": null,
+                "doc": "Lifecycle transition represented by the event"
+            },
+            {
+                "name": "state",
+                "type": ["null", "string"],
+                "default": null,
+                "doc": "Specifies the state reached within the process model or the artifact lifecycle that triggered the event"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1.extensions",
+        "type": "record",
+        "name": "GeoPoint",
+        "doc": "Information about geographical points in WGS84 reference system",
+        "fields": [
+            {
+                "name": "lon",
+                "type": "double",
+                "doc": "Longitude of the geopoint"
+            },
+            {
+                "name": "lat",
+                "type": "double",
+                "doc": "Latitude of the geopoint"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1.extensions",
+        "type": "record",
+        "name": "GeoExtension",
+        "doc": "Information about geographical points and shapes related with an event",
+        "fields": [
+            {
+                "name": "point",
+                "type": ["null","GeoPoint"],
+                "default": null,
+                "doc": "Geographical point related to the event in WGS84 reference system"
+            },
+            {
+                "name": "features",
+                "type": ["null","string"],
+                "default": null,
+                "doc": "Geographical features related to the event in GeoJSON format"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1.extensions",
+        "type": "record",
+        "name": "Extensions",
+        "doc": "Set of attributes for attaching common information to the event with analytic purposes",
+        "fields": [
+            {
+                "name": "flows",
+                "type": ["null", {"type": "array", "items": "LifecycleExtension"}],
+                "default": null,
+                "doc": "Information about process models or artifacts the event is related to"
+            },
+            {
+                "name": "geo",
+                "type": ["null", "GeoExtension"],
+                "default": null,
+                "doc": "Information about location related to the event"
+            }
+        ]
+    },
+    {
+        "namespace": "com.inditex.aqsw.pipe.v1",
+        "type": "record",
+        "name": "Metadata",
+        "doc": "Message context attributes",
+        "fields": [
+            {"name": "name", "type": "string",
+                "doc": "Unique name of the entity contained in the payload. I.e. 'cart'"},
+            {"name": "domain", "type": "string",
+                "doc": "Functional domain of the entity contained in the payload. I.e. 'purchase'"},
+            {"name": "version", "type": "string",
+                "doc": "Version of the entity contained in the payload"},
+            {"name": "id", "type": ["null", "string"], "default": null,
+                "doc": "Unique identifier of the the event"},
+            {"name": "timestamp", "type": "string",
+                "doc": "Timestamp of the occurrence of the business event"},
+            {"name": "action", "type": "string",
+                "doc": "Identifier of the action that generated the event. I.e. 'modified'"},
+            {"name": "envelope", "type": ["null", "Envelope"], "default": null,
+                "doc": "Data relative to the message container used to envelop the event"},
+            {"name": "classifiers", "type": ["null", {"type": "array", "items": "Classifier"}], "default": null,
+                "doc": "Set of classifiers to define different identities related with the event"},
+            {"name": "extensions", "type": ["null", "com.inditex.aqsw.pipe.v1.extensions.Extensions"], "default": null,
+                "doc": "Data relative to the business context that the message belongs to"},
+            {"name": "relationships", "type": ["null", {"type": "array", "items": "Relationship"}], "default": null,
+                "doc": "Relationship between the message and different business entities"},
+            {"name": "context", "type": ["null", {"type": "map", "values": "string"}], "default": null,
+                "doc": "Context data of the message that does not belong in the definition of the main entity"}
+        ]
+    }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "BaseProductChangeEnvelope",
+  "namespace": "com.inditex.mecc.ecomloadbk.api.avro.v1",
+  "subject": "meccano.productandcatalog.baseproduct.v1-value",
+  "doc": "Avro envelope that holds base product' changes.",
+  "type": "record",
+  "fields": [{
+    "name": "metadata",
+    "type": "com.inditex.aqsw.pipe.v1.Metadata",
+    "doc": "Avro's metadata information."
+  },
+  {
+    "name": "payload",
+    "doc": "Content of message",
+    "type": ["BaseProductType"]
+  }]
+}

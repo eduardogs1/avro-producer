@@ -1,0 +1,30 @@
+[
+  {
+    "name": "ProductChanged",
+    "namespace": "com.inditex.mecc.mecpcoco.api.avro.v1",
+    "doc": "Class that is used in order to notify that a product have changed.",
+    "type": "record",
+    "fields": [
+      {
+        "name": "product_id",
+        "type": "long",
+        "doc": "Product's unique identifier."
+      },
+      {
+        "name": "action",
+        "doc": "Indicates the kind of action.",
+        "type": {
+          "name": "ProductAction",
+          "type": "enum",
+          "symbols": ["CREATED", "UPDATED", "DELETED"]
+        }
+      },
+      {
+        "name": "action_at",
+        "type": "long",
+        "logicalType": "timestamp-micros",
+        "doc": "Date when the action took place."
+      }
+    ]
+  }
+]

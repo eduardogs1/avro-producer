@@ -1,0 +1,50 @@
+server:
+  port: 8088
+logging:
+  level:
+    root: INFO
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          contentType: application/*+avro
+amiga:
+  common:
+    stream:
+      bindings:
+        product-watcher-kafka-output:
+          destination: meccano.za.des.productandcatalog.product.public.v7
+          content-type: application/*+non-registered-avro
+          registered-schema: classpath:/event/mecprwat/v2/product_changes_envelope.avsc
+          header-injection:
+            headers:
+              itx_envelope_id: pipe-event:1.0
+        command-kafka-output:
+          destination: meccano.za.des.productandcatalog.commandcore.private.v1
+          content-type: application/*+non-registered-avro
+          registered-schema: classpath:/event/mecpcoco/v1/product_command_envelope.avsc
+          header-injection:
+            headers:
+              itx_envelope_id: pipe-event:1.0
+        subscriptions-kafka-output:
+          destination: meccano.za.des.mecpsept.coming-soon-availability-updated.public.v1
+          content-type: application/*+non-registered-avro
+          registered-schema: classpath:/event/mecpsept/v1/coming_soon_availability_updated_envelope.avsc
+          header-injection:
+            headers:
+              itx_envelope_id: pipe-event:1.0
+      schema:
+        developer-mode: true
+        kafka-brokers: ${qa.kafka.host:localhost}:${qa.kafka.port:9092}
+        fail-startup-on-validation-error: true
+        registry-client:
+          endpoint: http://${qa.schema_registry.host:localhost}:${qa.schema_registry.port:8082}
+        avro:
+          schema-imports:
+            - classpath*:/imports/**/*.avsc
+            - classpath*:/event/**/imports/**/*.avsc
+            - classpath*:/event/**/imported/**/*.avsc
+          schema-locations:
+            - classpath*:/event/**/*.avsc
+            - classpath*:/events/sources/**/*.avsc

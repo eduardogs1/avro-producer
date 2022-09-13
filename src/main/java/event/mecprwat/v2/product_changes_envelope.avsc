@@ -1,0 +1,223 @@
+{
+    "name": "ProductChangesEnvelope",
+    "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+    "subject": "meccano.productandcatalog.product.v7-value",
+    "doc": "Avro envelope that holds commercial components' changes.",
+    "type": "record",
+    "fields": [
+      {"name": "metadata", "type": "com.inditex.aqsw.pipe.v1.Metadata", "doc": "Avro's metadata information."},
+      {"name": "payload", "doc": "Content of message", "type": [
+        {"name": "CommercialComponentAvailabilityChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds availability changes in a Commercial Component.",
+          "fields": [
+            {"name": "store_id", "type": "long", "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's identifier."},
+            {"name": "commercial_component_type", "doc": "Type of commercial component.",
+                "type": {"name": "CommercialComponentType", "type": "enum", "symbols": ["PRODUCT","SINGLE_COMPONENT","BUNDLE_COMPONENT","BANNER"]}},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+            {"name": "availability",
+              "doc": "Availability information of the current commercial component.",
+              "type": {
+                "name": "Availability",
+                "type": "enum",
+                "symbols": ["IN_STOCK", "OUT_OF_STOCK","COMING_SOON", "BACK_SOON"]
+              }
+            },
+            {
+              "name": "items",
+              "doc": "List of child items of the current commercial component.",
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "AvailabilityItem",
+                  "doc": "Class that holds availability information for an item bean (aka an SKU).",
+                  "type": "record",
+                  "fields": [
+                    {"name": "item_id", "type": "long", "doc": "Item's identifier"},
+                    {"name": "availability", "type": "Availability", "doc": "Item's availability information."},
+                    {"name": "first_availability_date", "type": ["null","long"], "logicalType": "timestamp-micros", "doc": "First visible date in microseconds."},
+                    {"name": "is_available", "type": "boolean", "doc": "Whether the item is available"},
+                    {
+                      "name": "subscription_type",
+                      "doc": "Availability subscription type for item",
+                      "type": ["null", {
+                        "name": "AvailabilitySubscriptionType",
+                        "type": "enum",
+                        "symbols": ["BACK_SOON", "COMING_SOON"]
+                      }]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {"name": "CommercialComponentPriceChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "doc": "Class that holds price changes in a Commercial Component.",
+          "type": "record",
+          "fields": [
+            {"name": "store_id", "type": "long", "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's identifier."},
+            {"name": "commercial_component_type", "type": "CommercialComponentType", "doc": "Type of commercial component."},
+            {"name": "environment", "doc": "Environment where the change has been processed.", "type": { "name": "Environment", "type": "enum", "symbols": ["DRAFT", "LIVE"]}},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+            {
+              "name": "items",
+              "doc": "List of items child of the current commercial component.",
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "PriceItem",
+                  "type": "record",
+                  "doc": "Class that holds price information for an item bean.",
+                  "fields": [
+                    {
+                      "name": "item_id",
+                      "type": "long",
+                      "doc": "Item's identifier"
+                    },
+                    {
+                      "name": "offer",
+                      "doc": "Contains list of prices of the item bean.",
+                      "type": {
+                        "name": "Offer",
+                        "type": "record",
+                        "doc": "Class that holds the list of prices of the item bean.",
+                        "fields": [
+                          {
+                            "name": "prices",
+                            "doc": "List of prices of the current item.",
+                            "type": {
+                              "type": "array",
+                              "items": {
+                                "name": "Price",
+                                "type": "record",
+                                "doc": "Class that holds price information for a given period of time.",
+                                "fields": [
+                                  {"name": "start_date", "type": "long", "logicalType": "timestamp-millis", "doc": "Starting period date in milliseconds since epoch time where the price becomes valid."},
+                                  {"name": "end_date", "type": "long", "logicalType": "timestamp-millis", "order": "ignore", "doc": "Ending period date in milliseconds since epoch time where the price stops being valid."},
+                                  { "name": "price", "type": "long", "order": "ignore", "doc": "Current price during the current period expressed in the smallest legal unit available for the price currency (e.g. prices are expressed in euro's cents)."},
+                                  {"name": "old_price", "type": ["null", "long"], "order": "ignore", "doc": "Previous price of the product during a sales period expressed in the smallest legal unit available for the price currency (e.g. prices are expressed in euro's cents). This is optional and used to compare previous and current prices during sales."},
+                                  { "name": "currency_iso", "type": "string", "order": "ignore", "doc": "Currency ISO 4217 code."},
+                                  {"name": "promotion", "type": ["null", "string"], "default": null, "order": "ignore", "doc": "Price promotion information. This value will not be set on a regular price but will be set instead on sales and event prices."}
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+         {"name": "CommercialComponentExclusionChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds catalog exclusion changes in a Commercial Component.",
+          "fields": [
+            {"name": "environment", "type": "Environment", "doc": "Environment where the exclusion change has been processed."},
+            {"name": "store_id", "type": "long", "doc": "Store unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component unique identifier."},
+            {"name": "commercial_component_type", "type": "CommercialComponentType", "doc": "Type of commercial component (e.g. product, single component, bundle component or banner)"},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event timestamp expressed in microseconds."},
+            {"name": "is_excluded", "type": "boolean", "doc": "Indicates whether commercial component has been excluded or not."},
+            {
+              "name": "items",
+              "doc": "Child commercial components associated to this commercial component.",
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "ExclusionItem",
+                  "type": "record",
+                  "doc": "Holds exclusion state for a child commercial component.",
+                  "fields":[
+                    {"name": "item_id", "type": "long", "doc": "Commercial component id's associated to the parent commercial component that has been excluded or not." },
+                    {"name": "is_excluded",  "type": "boolean", "doc": "Indicates whether each child commercial component has been excluded or not."}
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {"name": "CommercialComponentXmediaChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds xmedia changes in a Commercial Component.",
+          "fields": [
+            {"name": "store_id", "type": ["null","long"], "default": null, "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component's identifier."},
+            {"name": "commercial_component_type", "type": "CommercialComponentType", "doc": "Type of commercial component."},
+            {"name": "environment", "type": "Environment", "doc": "Environment where the xmedia change has been processed."},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event's date in microseconds."},
+            {
+              "name": "xmedias",
+              "doc": "List of xmedias included in the commercial component.",
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "Xmedia",
+                  "type": "record",
+                  "doc": "Class that holds an Xmedia information.",
+                  "fields": [
+                    {"name": "color_id", "type": "string", "doc": "Identifier of the color which the xmedia belongs to"},
+                    {"name": "color_position", "type": "int", "doc": "Position of the color in the list of colors for a given product."},
+                    {"name": "set", "type": "int", "doc": "Contains the set this xmedia is associated to. Typically front end will only display xmedia containing set = 2"},
+                    {"name": "type", "type": "string", "doc": "Indicates the type of xmedia (e.g. image, audio, video, vector or hls among others)"},
+                    {"name": "kind", "type": "string", "doc": "Secondary classification of xmedia (e.g. double, animation, double-animation) to be used for grids, or containing information about the image associated in a product detail view (e.g. full, side, back, detail, plain, look or colorcut)"},
+                    {"name": "index", "type" : "int", "doc": "This index is used to discriminate different media for the same kind."},
+                    {"name": "path", "type": "string", "doc": "Path where the xmedia is found within the base URL for a given xmedia types. Base URL's are defined within available xmedia formats for a given store"},
+                    {"name": "name", "type": "string", "doc": "File name of the xmedia that can be used to build the URL. File extension is obtained from the xmedia format corresponding to the xmedia."},
+                    {"name": "width", "type": "int", "doc": "Width of the highest resolution version of the xmedia expressed in pixels. This can be used to compute aspect ratios."},
+                    {"name": "height", "type": "int", "doc": "Height of the highest resolution version of the xmedia expressed in pixels. This can be used to compute aspect ratios."},
+                    {"name": "timestamp", "type": "string", "doc": "Timestamp of the xmedia expressed in milliseconds since epoch time. This is used to keep further control of browser caches."},
+                    {"name": "allowed_screens", "type": { "type": "array", "items": "string", "doc": "array of allowed screen values."}, "doc": "Indicates whether this xmedia is suitable for small screens (e.g. phones), large screens (e.g. computers and tablets) or both."},
+                    {
+                      "name": "locations",
+                      "doc": "List of locations where the media was designed for.",
+                      "type": {
+                        "type": "array",
+                        "items": {
+                          "name": "Location",
+                          "doc": "Class that holds location information for the media.",
+                          "type": "record",
+                          "fields": [
+                            {"name": "name", "type": "string", "doc": "Location's name."},
+                            { "name": "order", "type": "int", "doc": "Order in which media should be displayed."}
+                          ]
+                        }
+                      }
+                    },
+                    {"name": "extra_info", "doc": "Additional information used by other Inditex brands.", "type": {"type": "map", "values": "string", "doc": "Map of string keys and values defining the extra info."}}
+                  ]
+                }
+              }
+            }
+          ]
+        },
+         {"name": "CommercialComponentDeleted",
+            "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+            "type": "record",
+            "doc": "Class that holds deleted commercial components. ",
+            "fields": [
+              {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component unique identifier."},
+              {"name": "commercial_component_type", "type": "CommercialComponentType", "doc": "Type of commercial component (e.g. product, single component, or bundle component)"},
+              {"name": "deleted_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event timestamp expressed in microseconds."},
+              {"name": "environment", "type": "Environment", "doc": "Environment where the change has been processed."}
+            ]
+          },
+        "ProductStructureChanged",
+        "SingleComponentStructureChanged",
+        "BundleComponentStructureChanged",
+        "ProductExtendedInfoChanged",
+        "SingleComponentExtendedInfoChanged",
+        "BundleComponentExtendedInfoChanged"
+      ]
+    }
+  ]
+}
