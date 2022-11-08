@@ -1,0 +1,13 @@
+{
+  "name": "SeasonLessProductPriceChangeEnvelope",
+  "domain": "productandcatalog",
+  "version": "version",
+  "id": null,
+  "timestamp": "2021-11-26T08:20:15.534209Z",
+  "action": "CRUD",
+  "envelope": null,
+  "classifiers": null,
+  "extensions": null,
+  "relationships": null,
+  "context": null
+}

@@ -2,7 +2,10 @@ package com.edu.avroproducer;
 
 import java.util.Collections;
 
+import com.inditex.aqsw.framework.common.stream.schema.SchemaStore;
 import com.inditex.aqsw.pipe.v1.Metadata;
+import com.inditex.mecc.ecomloadbk.api.avro.v2.SeasonLessProductPriceChangeEnvelope;
+import com.inditex.mecc.ecomloadbk.api.avro.v2.SeasonLessProductPriceType;
 import com.inditex.mecc.mecpcoco.api.avro.v1.ProductAction;
 import com.inditex.mecc.mecpcoco.api.avro.v1.ProductChanged;
 import com.inditex.mecc.mecpcoco.api.avro.v1.ProductCommandEnvelope;
@@ -13,6 +16,7 @@ import com.inditex.mecc.mecprwat.api.avro.v2.ProductChangesEnvelope;
 import com.inditex.mecc.mecpsept.events.v1.ComingSoonAvailabilityUpdated;
 import com.inditex.mecc.mecpsept.events.v1.ComingSoonAvailabilityUpdatedEnvelope;
 
+import com.edu.avroproducer.utils.TestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.Message;
@@ -20,11 +24,11 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
-/**
- * Implements {@link ProductWatcherEventProducer} by using a Kafka Client in order to send expected Product Watcher events.
- */
 @Component
 public class MessageProducer {
+
+  private static final String METADATA = "/json/prices/ecomload_metadata.json";
+  private static final String UPSERT_SKU_PRICES = "/json/prices/upsert_sku_prices_request_ok.json";
 
   @Autowired
   @Qualifier("watcher")
@@ -37,6 +41,31 @@ public class MessageProducer {
   @Autowired
   @Qualifier("subscriptions")
   private MessageChannel subscriptionsKafkaChannel;
+
+  @Autowired
+  @Qualifier("prices")
+  private MessageChannel pricesKafkaChannel;
+
+  @Autowired
+  SchemaStore schemaStore;
+
+  public void sendPrices() {
+    SeasonLessProductPriceChangeEnvelope payload = getPricesEnvelope(UPSERT_SKU_PRICES);
+
+    Message<SeasonLessProductPriceChangeEnvelope> message = MessageBuilder
+        .withPayload(payload).setHeader("contentType", "application/*+avro").setHeader("deliveryAttempt", 0)
+        .build();
+
+    pricesKafkaChannel.send(message);
+  }
+
+  private SeasonLessProductPriceChangeEnvelope getPricesEnvelope(final String payloadFile) {
+    return SeasonLessProductPriceChangeEnvelope.newBuilder()
+        .setMetadata(TestUtil.jsonDecodeToAvro(METADATA, Metadata.class, Metadata.getClassSchema()))
+        .setPayload(TestUtil.jsonDecodeToAvro(payloadFile, SeasonLessProductPriceType.class,
+            SeasonLessProductPriceType.getClassSchema()))
+        .build();
+  }
 
   public void sendWatcher() {
     Metadata metadata = Metadata.newBuilder().setClassifiers(Collections.EMPTY_LIST).setName("ecomload").setVersion("e").setDomain("ALL")

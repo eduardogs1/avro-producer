@@ -30,4 +30,10 @@ public class AmigaStreamConfiguration {
   public MessageChannel subscriptions(final PipeStreamChannels pipeStreamChannels) {
     return pipeStreamChannels.subscriptionsKafkaOutput();
   }
+
+  @Bean
+  @Primary
+  public MessageChannel prices(final PipeStreamChannels pipeStreamChannels) {
+    return pipeStreamChannels.pricesKafkaOutput();
+  }
 }

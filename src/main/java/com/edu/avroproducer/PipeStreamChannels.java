@@ -20,4 +20,9 @@ public interface PipeStreamChannels {
   @Output(SUBSCRIPTIONS_KAFKA_OUTPUT)
   SubscribableChannel subscriptionsKafkaOutput();
 
+  String PRICES_KAFKA_OUTPUT = "prices-kafka-output";
+
+  @Output(PRICES_KAFKA_OUTPUT)
+  SubscribableChannel pricesKafkaOutput();
+
 }

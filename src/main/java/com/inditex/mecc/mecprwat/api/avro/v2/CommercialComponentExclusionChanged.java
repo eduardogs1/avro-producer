@@ -15,8 +15,8 @@ import org.apache.avro.message.SchemaStore;
 /** Class that holds catalog exclusion changes in a Commercial Component. */
 @org.apache.avro.specific.AvroGenerated
 public class CommercialComponentExclusionChanged extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5425606238966432967L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommercialComponentExclusionChanged\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds catalog exclusion changes in a Commercial Component.\",\"fields\":[{\"name\":\"environment\",\"type\":{\"type\":\"enum\",\"name\":\"Environment\",\"symbols\":[\"DRAFT\",\"LIVE\"]},\"doc\":\"Environment where the exclusion change has been processed.\"},{\"name\":\"store_id\",\"type\":\"long\",\"doc\":\"Store unique identifier.\"},{\"name\":\"commercial_component_id\",\"type\":\"long\",\"doc\":\"Commercial component unique identifier.\"},{\"name\":\"commercial_component_type\",\"type\":{\"type\":\"enum\",\"name\":\"CommercialComponentType\",\"symbols\":[\"PRODUCT\",\"SINGLE_COMPONENT\",\"BUNDLE_COMPONENT\",\"BANNER\"]},\"doc\":\"Type of commercial component (e.g. product, single component, bundle component or banner)\"},{\"name\":\"updated_at\",\"type\":\"long\",\"doc\":\"Event timestamp expressed in microseconds.\",\"logicalType\":\"timestamp-micros\"},{\"name\":\"is_excluded\",\"type\":\"boolean\",\"doc\":\"Indicates whether commercial component has been excluded or not.\"},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ExclusionItem\",\"doc\":\"Holds exclusion state for a child commercial component.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Commercial component id's associated to the parent commercial component that has been excluded or not.\"},{\"name\":\"is_excluded\",\"type\":\"boolean\",\"doc\":\"Indicates whether each child commercial component has been excluded or not.\"}]}},\"doc\":\"Child commercial components associated to this commercial component.\"}]}");
+  private static final long serialVersionUID = -4067437258580158532L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommercialComponentExclusionChanged\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds catalog exclusion changes in a Commercial Component.\",\"fields\":[{\"name\":\"environment\",\"type\":{\"type\":\"enum\",\"name\":\"Environment\",\"symbols\":[\"DRAFT\",\"LIVE\"]},\"doc\":\"Environment where the exclusion change has been processed.\"},{\"name\":\"store_id\",\"type\":\"long\",\"doc\":\"Store unique identifier.\"},{\"name\":\"commercial_component_id\",\"type\":\"long\",\"doc\":\"Commercial component unique identifier.\"},{\"name\":\"commercial_component_type\",\"type\":{\"type\":\"enum\",\"name\":\"CommercialComponentType\",\"symbols\":[\"PRODUCT\",\"SINGLE_COMPONENT\",\"BUNDLE_COMPONENT\",\"BANNER\"]},\"doc\":\"Type of commercial component (e.g. product, single component, bundle component or banner)\"},{\"name\":\"updated_at\",\"type\":\"long\",\"doc\":\"Event timestamp expressed in microseconds.\",\"logicalType\":\"timestamp-micros\"},{\"name\":\"is_excluded\",\"type\":\"boolean\",\"doc\":\"Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.\"},{\"name\":\"is_excluded_real\",\"type\":\"boolean\",\"doc\":\"Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions\"},{\"name\":\"is_strict_excluded\",\"type\":[\"null\",\"boolean\"],\"doc\":\"DEPRECATED ::Indicates whether single or bundle component has been excluded or not.\",\"default\":null},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ExclusionItem\",\"doc\":\"Holds exclusion state for a child commercial component.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Commercial component id's associated to the parent commercial component that has been excluded or not.\"},{\"name\":\"is_excluded\",\"type\":\"boolean\",\"doc\":\"Indicates whether each child commercial component has been excluded or not.\"}]}},\"doc\":\"Child commercial components associated to this commercial component.\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -82,8 +82,12 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
   @Deprecated public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType commercial_component_type;
   /** Event timestamp expressed in microseconds. */
   @Deprecated public long updated_at;
-  /** Indicates whether commercial component has been excluded or not. */
+  /** Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded. */
   @Deprecated public boolean is_excluded;
+  /** Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions */
+  @Deprecated public boolean is_excluded_real;
+  /** DEPRECATED ::Indicates whether single or bundle component has been excluded or not. */
+  @Deprecated public java.lang.Boolean is_strict_excluded;
   /** Child commercial components associated to this commercial component. */
   @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> items;
 
@@ -101,16 +105,20 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
    * @param commercial_component_id Commercial component unique identifier.
    * @param commercial_component_type Type of commercial component (e.g. product, single component, bundle component or banner)
    * @param updated_at Event timestamp expressed in microseconds.
-   * @param is_excluded Indicates whether commercial component has been excluded or not.
+   * @param is_excluded Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
+   * @param is_excluded_real Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+   * @param is_strict_excluded DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
    * @param items Child commercial components associated to this commercial component.
    */
-  public CommercialComponentExclusionChanged(com.inditex.mecc.mecprwat.api.avro.v2.Environment environment, java.lang.Long store_id, java.lang.Long commercial_component_id, com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType commercial_component_type, java.lang.Long updated_at, java.lang.Boolean is_excluded, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> items) {
+  public CommercialComponentExclusionChanged(com.inditex.mecc.mecprwat.api.avro.v2.Environment environment, java.lang.Long store_id, java.lang.Long commercial_component_id, com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType commercial_component_type, java.lang.Long updated_at, java.lang.Boolean is_excluded, java.lang.Boolean is_excluded_real, java.lang.Boolean is_strict_excluded, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> items) {
     this.environment = environment;
     this.store_id = store_id;
     this.commercial_component_id = commercial_component_id;
     this.commercial_component_type = commercial_component_type;
     this.updated_at = updated_at;
     this.is_excluded = is_excluded;
+    this.is_excluded_real = is_excluded_real;
+    this.is_strict_excluded = is_strict_excluded;
     this.items = items;
   }
 
@@ -125,7 +133,9 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
     case 3: return commercial_component_type;
     case 4: return updated_at;
     case 5: return is_excluded;
-    case 6: return items;
+    case 6: return is_excluded_real;
+    case 7: return is_strict_excluded;
+    case 8: return items;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -140,7 +150,9 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
     case 3: commercial_component_type = (com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType)value$; break;
     case 4: updated_at = (java.lang.Long)value$; break;
     case 5: is_excluded = (java.lang.Boolean)value$; break;
-    case 6: items = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem>)value$; break;
+    case 6: is_excluded_real = (java.lang.Boolean)value$; break;
+    case 7: is_strict_excluded = (java.lang.Boolean)value$; break;
+    case 8: items = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -237,7 +249,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
   /**
    * Gets the value of the 'is_excluded' field.
-   * @return Indicates whether commercial component has been excluded or not.
+   * @return Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
    */
   public boolean getIsExcluded() {
     return is_excluded;
@@ -246,11 +258,47 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
   /**
    * Sets the value of the 'is_excluded' field.
-   * Indicates whether commercial component has been excluded or not.
+   * Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
    * @param value the value to set.
    */
   public void setIsExcluded(boolean value) {
     this.is_excluded = value;
+  }
+
+  /**
+   * Gets the value of the 'is_excluded_real' field.
+   * @return Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+   */
+  public boolean getIsExcludedReal() {
+    return is_excluded_real;
+  }
+
+
+  /**
+   * Sets the value of the 'is_excluded_real' field.
+   * Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+   * @param value the value to set.
+   */
+  public void setIsExcludedReal(boolean value) {
+    this.is_excluded_real = value;
+  }
+
+  /**
+   * Gets the value of the 'is_strict_excluded' field.
+   * @return DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+   */
+  public java.lang.Boolean getIsStrictExcluded() {
+    return is_strict_excluded;
+  }
+
+
+  /**
+   * Sets the value of the 'is_strict_excluded' field.
+   * DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+   * @param value the value to set.
+   */
+  public void setIsStrictExcluded(java.lang.Boolean value) {
+    this.is_strict_excluded = value;
   }
 
   /**
@@ -322,8 +370,12 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
     private com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType commercial_component_type;
     /** Event timestamp expressed in microseconds. */
     private long updated_at;
-    /** Indicates whether commercial component has been excluded or not. */
+    /** Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded. */
     private boolean is_excluded;
+    /** Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions */
+    private boolean is_excluded_real;
+    /** DEPRECATED ::Indicates whether single or bundle component has been excluded or not. */
+    private java.lang.Boolean is_strict_excluded;
     /** Child commercial components associated to this commercial component. */
     private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> items;
 
@@ -362,9 +414,17 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
         this.is_excluded = data().deepCopy(fields()[5].schema(), other.is_excluded);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.items)) {
-        this.items = data().deepCopy(fields()[6].schema(), other.items);
+      if (isValidValue(fields()[6], other.is_excluded_real)) {
+        this.is_excluded_real = data().deepCopy(fields()[6].schema(), other.is_excluded_real);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.is_strict_excluded)) {
+        this.is_strict_excluded = data().deepCopy(fields()[7].schema(), other.is_strict_excluded);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
+      if (isValidValue(fields()[8], other.items)) {
+        this.items = data().deepCopy(fields()[8].schema(), other.items);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
     }
 
@@ -398,9 +458,17 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
         this.is_excluded = data().deepCopy(fields()[5].schema(), other.is_excluded);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.items)) {
-        this.items = data().deepCopy(fields()[6].schema(), other.items);
+      if (isValidValue(fields()[6], other.is_excluded_real)) {
+        this.is_excluded_real = data().deepCopy(fields()[6].schema(), other.is_excluded_real);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.is_strict_excluded)) {
+        this.is_strict_excluded = data().deepCopy(fields()[7].schema(), other.is_strict_excluded);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.items)) {
+        this.items = data().deepCopy(fields()[8].schema(), other.items);
+        fieldSetFlags()[8] = true;
       }
     }
 
@@ -623,7 +691,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
     /**
       * Gets the value of the 'is_excluded' field.
-      * Indicates whether commercial component has been excluded or not.
+      * Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
       * @return The value.
       */
     public boolean getIsExcluded() {
@@ -633,7 +701,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
     /**
       * Sets the value of the 'is_excluded' field.
-      * Indicates whether commercial component has been excluded or not.
+      * Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
       * @param value The value of 'is_excluded'.
       * @return This builder.
       */
@@ -646,7 +714,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
     /**
       * Checks whether the 'is_excluded' field has been set.
-      * Indicates whether commercial component has been excluded or not.
+      * Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
       * @return True if the 'is_excluded' field has been set, false otherwise.
       */
     public boolean hasIsExcluded() {
@@ -656,11 +724,98 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
     /**
       * Clears the value of the 'is_excluded' field.
-      * Indicates whether commercial component has been excluded or not.
+      * Indicates whether commercial component has been excluded or not. Or all of his items/products has been excluded.
       * @return This builder.
       */
     public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder clearIsExcluded() {
       fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'is_excluded_real' field.
+      * Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+      * @return The value.
+      */
+    public boolean getIsExcludedReal() {
+      return is_excluded_real;
+    }
+
+
+    /**
+      * Sets the value of the 'is_excluded_real' field.
+      * Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+      * @param value The value of 'is_excluded_real'.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder setIsExcludedReal(boolean value) {
+      validate(fields()[6], value);
+      this.is_excluded_real = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'is_excluded_real' field has been set.
+      * Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+      * @return True if the 'is_excluded_real' field has been set, false otherwise.
+      */
+    public boolean hasIsExcludedReal() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'is_excluded_real' field.
+      * Indicates ONLY if commercial component has been excluded or not, regardless of product or items exclusions
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder clearIsExcludedReal() {
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'is_strict_excluded' field.
+      * DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+      * @return The value.
+      */
+    public java.lang.Boolean getIsStrictExcluded() {
+      return is_strict_excluded;
+    }
+
+
+    /**
+      * Sets the value of the 'is_strict_excluded' field.
+      * DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+      * @param value The value of 'is_strict_excluded'.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder setIsStrictExcluded(java.lang.Boolean value) {
+      validate(fields()[7], value);
+      this.is_strict_excluded = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'is_strict_excluded' field has been set.
+      * DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+      * @return True if the 'is_strict_excluded' field has been set, false otherwise.
+      */
+    public boolean hasIsStrictExcluded() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'is_strict_excluded' field.
+      * DEPRECATED ::Indicates whether single or bundle component has been excluded or not.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder clearIsStrictExcluded() {
+      is_strict_excluded = null;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -681,9 +836,9 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder setItems(java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> value) {
-      validate(fields()[6], value);
+      validate(fields()[8], value);
       this.items = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -693,7 +848,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
       * @return True if the 'items' field has been set, false otherwise.
       */
     public boolean hasItems() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[8];
     }
 
 
@@ -704,7 +859,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
       */
     public com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentExclusionChanged.Builder clearItems() {
       items = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -719,7 +874,9 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
         record.commercial_component_type = fieldSetFlags()[3] ? this.commercial_component_type : (com.inditex.mecc.mecprwat.api.avro.v2.CommercialComponentType) defaultValue(fields()[3]);
         record.updated_at = fieldSetFlags()[4] ? this.updated_at : (java.lang.Long) defaultValue(fields()[4]);
         record.is_excluded = fieldSetFlags()[5] ? this.is_excluded : (java.lang.Boolean) defaultValue(fields()[5]);
-        record.items = fieldSetFlags()[6] ? this.items : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem>) defaultValue(fields()[6]);
+        record.is_excluded_real = fieldSetFlags()[6] ? this.is_excluded_real : (java.lang.Boolean) defaultValue(fields()[6]);
+        record.is_strict_excluded = fieldSetFlags()[7] ? this.is_strict_excluded : (java.lang.Boolean) defaultValue(fields()[7]);
+        record.items = fieldSetFlags()[8] ? this.items : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem>) defaultValue(fields()[8]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -764,6 +921,16 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
     out.writeBoolean(this.is_excluded);
 
+    out.writeBoolean(this.is_excluded_real);
+
+    if (this.is_strict_excluded == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeBoolean(this.is_strict_excluded);
+    }
+
     long size0 = this.items.size();
     out.writeArrayStart();
     out.setItemCount(size0);
@@ -796,6 +963,15 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
 
       this.is_excluded = in.readBoolean();
 
+      this.is_excluded_real = in.readBoolean();
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.is_strict_excluded = null;
+      } else {
+        this.is_strict_excluded = in.readBoolean();
+      }
+
       long size0 = in.readArrayStart();
       java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> a0 = this.items;
       if (a0 == null) {
@@ -815,7 +991,7 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
       }
 
     } else {
-      for (int i = 0; i < 7; i++) {
+      for (int i = 0; i < 9; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.environment = com.inditex.mecc.mecprwat.api.avro.v2.Environment.values()[in.readEnum()];
@@ -842,6 +1018,19 @@ public class CommercialComponentExclusionChanged extends org.apache.avro.specifi
           break;
 
         case 6:
+          this.is_excluded_real = in.readBoolean();
+          break;
+
+        case 7:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.is_strict_excluded = null;
+          } else {
+            this.is_strict_excluded = in.readBoolean();
+          }
+          break;
+
+        case 8:
           long size0 = in.readArrayStart();
           java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExclusionItem> a0 = this.items;
           if (a0 == null) {

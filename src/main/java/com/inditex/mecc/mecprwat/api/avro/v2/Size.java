@@ -15,8 +15,8 @@ import org.apache.avro.message.SchemaStore;
 /** Class that holds size's information. */
 @org.apache.avro.specific.AvroGenerated
 public class Size extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6774179566761167434L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Size\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds size's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Size's identifier.\"},{\"name\":\"size_name\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"I18NText\",\"doc\":\"Class that holds a text and its locale ISO code.\",\"fields\":[{\"name\":\"iso_code\",\"type\":\"string\",\"doc\":\"Locale ISO code.\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"Internationalized text.\"}]}},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]},{\"name\":\"position\",\"type\":\"int\",\"doc\":\"Occupied position in the size list.\"},{\"name\":\"equivalent_id\",\"type\":\"int\",\"doc\":\"Equivalent to size identifier but support multiples sizes for the same sku.\"},{\"name\":\"size_fit\",\"type\":\"string\",\"doc\":\"Indicate particularities about the size\"},{\"name\":\"size_value\",\"type\":[\"null\",\"string\"],\"doc\":\"Indicates size value description\",\"default\":null},{\"name\":\"size_short_description\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's short description in a bunch of locales.\",\"default\":[]}]}");
+  private static final long serialVersionUID = -2699665890099132035L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Size\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds size's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Size's identifier.\"},{\"name\":\"size_name\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"I18NText\",\"doc\":\"Class that holds a text and its locale ISO code.\",\"fields\":[{\"name\":\"iso_code\",\"type\":\"string\",\"doc\":\"Locale ISO code.\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"Internationalized text.\"}]}},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]},{\"name\":\"position\",\"type\":\"int\",\"doc\":\"Occupied position in the size list.\"},{\"name\":\"equivalent_id\",\"type\":\"int\",\"doc\":\"Equivalent to size identifier but support multiples sizes for the same sku.\"},{\"name\":\"size_fit\",\"type\":\"string\",\"doc\":\"Indicate particularities about the size\"},{\"name\":\"size_value\",\"type\":[\"null\",\"string\"],\"doc\":\"Indicates size value description\",\"default\":null},{\"name\":\"size_short_description\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's short description in a bunch of locales.\",\"default\":[]},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ExtendedInfoItem\",\"doc\":\"Class that holds item's information.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Item's identifier.\"},{\"name\":\"item_composition_id\",\"type\":[\"null\",\"long\"],\"doc\":\"Id of the item composition\",\"default\":null},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null}]}},\"doc\":\"All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')\",\"default\":[]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -86,6 +86,8 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
   @Deprecated public java.lang.CharSequence size_value;
   /** Size's short description in a bunch of locales. */
   @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_short_description;
+  /** All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados') */
+  @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> items;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -103,8 +105,9 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
    * @param size_fit Indicate particularities about the size
    * @param size_value Indicates size value description
    * @param size_short_description Size's short description in a bunch of locales.
+   * @param items All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
    */
-  public Size(java.lang.Long id, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_name, java.lang.Integer position, java.lang.Integer equivalent_id, java.lang.CharSequence size_fit, java.lang.CharSequence size_value, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_short_description) {
+  public Size(java.lang.Long id, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_name, java.lang.Integer position, java.lang.Integer equivalent_id, java.lang.CharSequence size_fit, java.lang.CharSequence size_value, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_short_description, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> items) {
     this.id = id;
     this.size_name = size_name;
     this.position = position;
@@ -112,6 +115,7 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
     this.size_fit = size_fit;
     this.size_value = size_value;
     this.size_short_description = size_short_description;
+    this.items = items;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -126,6 +130,7 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
     case 4: return size_fit;
     case 5: return size_value;
     case 6: return size_short_description;
+    case 7: return items;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -141,6 +146,7 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
     case 4: size_fit = (java.lang.CharSequence)value$; break;
     case 5: size_value = (java.lang.CharSequence)value$; break;
     case 6: size_short_description = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText>)value$; break;
+    case 7: items = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -272,6 +278,24 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
+   * Gets the value of the 'items' field.
+   * @return All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+   */
+  public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> getItems() {
+    return items;
+  }
+
+
+  /**
+   * Sets the value of the 'items' field.
+   * All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+   * @param value the value to set.
+   */
+  public void setItems(java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> value) {
+    this.items = value;
+  }
+
+  /**
    * Creates a new Size RecordBuilder.
    * @return A new Size RecordBuilder
    */
@@ -326,6 +350,8 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
     private java.lang.CharSequence size_value;
     /** Size's short description in a bunch of locales. */
     private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_short_description;
+    /** All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados') */
+    private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> items;
 
     /** Creates a new Builder */
     private Builder() {
@@ -366,6 +392,10 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
         this.size_short_description = data().deepCopy(fields()[6].schema(), other.size_short_description);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
+      if (isValidValue(fields()[7], other.items)) {
+        this.items = data().deepCopy(fields()[7].schema(), other.items);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
     }
 
     /**
@@ -401,6 +431,10 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
       if (isValidValue(fields()[6], other.size_short_description)) {
         this.size_short_description = data().deepCopy(fields()[6].schema(), other.size_short_description);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.items)) {
+        this.items = data().deepCopy(fields()[7].schema(), other.items);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -709,6 +743,50 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /**
+      * Gets the value of the 'items' field.
+      * All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+      * @return The value.
+      */
+    public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> getItems() {
+      return items;
+    }
+
+
+    /**
+      * Sets the value of the 'items' field.
+      * All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+      * @param value The value of 'items'.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.Size.Builder setItems(java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> value) {
+      validate(fields()[7], value);
+      this.items = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'items' field has been set.
+      * All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+      * @return True if the 'items' field has been set, false otherwise.
+      */
+    public boolean hasItems() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'items' field.
+      * All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.Size.Builder clearItems() {
+      items = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Size build() {
@@ -721,6 +799,7 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
         record.size_fit = fieldSetFlags()[4] ? this.size_fit : (java.lang.CharSequence) defaultValue(fields()[4]);
         record.size_value = fieldSetFlags()[5] ? this.size_value : (java.lang.CharSequence) defaultValue(fields()[5]);
         record.size_short_description = fieldSetFlags()[6] ? this.size_short_description : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText>) defaultValue(fields()[6]);
+        record.items = fieldSetFlags()[7] ? this.items : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>) defaultValue(fields()[7]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -795,6 +874,19 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
     if (actualSize1 != size1)
       throw new java.util.ConcurrentModificationException("Array-size written was " + size1 + ", but element count was " + actualSize1 + ".");
 
+    long size2 = this.items.size();
+    out.writeArrayStart();
+    out.setItemCount(size2);
+    long actualSize2 = 0;
+    for (com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem e2: this.items) {
+      actualSize2++;
+      out.startItem();
+      e2.customEncode(out);
+    }
+    out.writeArrayEnd();
+    if (actualSize2 != size2)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size2 + ", but element count was " + actualSize2 + ".");
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -853,8 +945,26 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
         }
       }
 
+      long size2 = in.readArrayStart();
+      java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> a2 = this.items;
+      if (a2 == null) {
+        a2 = new SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>((int)size2, SCHEMA$.getField("items").schema());
+        this.items = a2;
+      } else a2.clear();
+      SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>)a2 : null);
+      for ( ; 0 < size2; size2 = in.arrayNext()) {
+        for ( ; size2 != 0; size2--) {
+          com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem e2 = (ga2 != null ? ga2.peek() : null);
+          if (e2 == null) {
+            e2 = new com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem();
+          }
+          e2.customDecode(in);
+          a2.add(e2);
+        }
+      }
+
     } else {
-      for (int i = 0; i < 7; i++) {
+      for (int i = 0; i < 8; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readLong();
@@ -917,6 +1027,26 @@ public class Size extends org.apache.avro.specific.SpecificRecordBase implements
               }
               e1.customDecode(in);
               a1.add(e1);
+            }
+          }
+          break;
+
+        case 7:
+          long size2 = in.readArrayStart();
+          java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> a2 = this.items;
+          if (a2 == null) {
+            a2 = new SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>((int)size2, SCHEMA$.getField("items").schema());
+            this.items = a2;
+          } else a2.clear();
+          SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem>)a2 : null);
+          for ( ; 0 < size2; size2 = in.arrayNext()) {
+            for ( ; size2 != 0; size2--) {
+              com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem e2 = (ga2 != null ? ga2.peek() : null);
+              if (e2 == null) {
+                e2 = new com.inditex.mecc.mecprwat.api.avro.v2.ExtendedInfoItem();
+              }
+              e2.customDecode(in);
+              a2.add(e2);
             }
           }
           break;

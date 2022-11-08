@@ -15,8 +15,8 @@ import org.apache.avro.message.SchemaStore;
 /** Holds basic data of a child commercial component. */
 @org.apache.avro.specific.AvroGenerated
 public class Item extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 568859995450672647L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Item\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Holds basic data of a child commercial component.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Child commercial component unique id.\"},{\"name\":\"size_id\",\"type\":\"long\",\"doc\":\"Child commercial component size id.\"},{\"name\":\"is_buyable\",\"type\":\"boolean\",\"doc\":\"Indicates whether the item is buyable or not.\"},{\"name\":\"reference\",\"type\":\"string\",\"doc\":\"Child commercial component partnumber.\"},{\"name\":\"hscode\",\"type\":[\"null\",\"long\"],\"doc\":\"Tariff heading code used by finances.\",\"default\":null},{\"name\":\"country_manufacture\",\"type\":[\"null\",\"string\"],\"doc\":\"Code indicating the country of manufacture\",\"default\":null},{\"name\":\"join_life\",\"type\":[\"null\",\"string\"],\"doc\":\"Join life code.\"},{\"name\":\"marks\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Marks at item level\",\"default\":[]},{\"name\":\"measures\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Measure\",\"doc\":\"Class that holds the information about an individual measure.\",\"fields\":[{\"name\":\"kind\",\"type\":\"string\",\"doc\":\"Kind of measure [weight, length, width, height]\"},{\"name\":\"unit\",\"type\":\"string\",\"doc\":\"Unit of the measure\"},{\"name\":\"value\",\"type\":\"double\",\"doc\":\"Measure value\"},{\"name\":\"store_id\",\"type\":[\"null\",\"long\"],\"doc\":\"StoreId of the measure\",\"default\":null}]}},\"doc\":\"Indicates measures for an item\",\"default\":[]},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null}]}");
+  private static final long serialVersionUID = 4223119870029400621L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Item\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Holds basic data of a child commercial component.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Child commercial component unique id.\"},{\"name\":\"size_id\",\"type\":\"long\",\"doc\":\"Child commercial component size id.\"},{\"name\":\"is_buyable\",\"type\":\"boolean\",\"doc\":\"Indicates whether the item is buyable or not.\"},{\"name\":\"reference\",\"type\":\"string\",\"doc\":\"Child commercial component partnumber.\"},{\"name\":\"hscode\",\"type\":[\"null\",\"long\"],\"doc\":\"Tariff heading code used by finances.\",\"default\":null},{\"name\":\"country_manufacture\",\"type\":[\"null\",\"string\"],\"doc\":\"Code indicating the country of manufacture\",\"default\":null},{\"name\":\"join_life\",\"type\":[\"null\",\"string\"],\"doc\":\"Join life code.\"},{\"name\":\"marks\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Marks at item level\",\"default\":[]},{\"name\":\"measures\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Measure\",\"doc\":\"Class that holds the information about an individual measure.\",\"fields\":[{\"name\":\"kind\",\"type\":\"string\",\"doc\":\"Kind of measure [weight, length, width, height]\"},{\"name\":\"unit\",\"type\":\"string\",\"doc\":\"Unit of the measure\"},{\"name\":\"value\",\"type\":\"double\",\"doc\":\"Measure value\"},{\"name\":\"store_id\",\"type\":[\"null\",\"long\"],\"doc\":\"StoreId of the measure\",\"default\":null}]}},\"doc\":\"Indicates measures for an item\",\"default\":[]},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null},{\"name\":\"multi_valued_attributes\",\"type\":[\"null\",{\"type\":\"map\",\"values\":{\"type\":\"record\",\"name\":\"MultiValuedAttribute\",\"doc\":\"Class that represents a list of values for a multi valued attribute.\",\"fields\":[{\"name\":\"values\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Indicates the values of the attribute.\",\"default\":[]}]},\"default\":{}}],\"doc\":\"List of multi_valued_attributes of the item\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -92,6 +92,8 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
   @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure> measures;
   /** Optional with dynamic additional information. */
   @Deprecated public java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info;
+  /** List of multi_valued_attributes of the item */
+  @Deprecated public java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> multi_valued_attributes;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -112,8 +114,9 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
    * @param marks Marks at item level
    * @param measures Indicates measures for an item
    * @param additional_info Optional with dynamic additional information.
+   * @param multi_valued_attributes List of multi_valued_attributes of the item
    */
-  public Item(java.lang.Long item_id, java.lang.Long size_id, java.lang.Boolean is_buyable, java.lang.CharSequence reference, java.lang.Long hscode, java.lang.CharSequence country_manufacture, java.lang.CharSequence join_life, java.util.List<java.lang.CharSequence> marks, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure> measures, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info) {
+  public Item(java.lang.Long item_id, java.lang.Long size_id, java.lang.Boolean is_buyable, java.lang.CharSequence reference, java.lang.Long hscode, java.lang.CharSequence country_manufacture, java.lang.CharSequence join_life, java.util.List<java.lang.CharSequence> marks, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure> measures, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info, java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> multi_valued_attributes) {
     this.item_id = item_id;
     this.size_id = size_id;
     this.is_buyable = is_buyable;
@@ -124,6 +127,7 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
     this.marks = marks;
     this.measures = measures;
     this.additional_info = additional_info;
+    this.multi_valued_attributes = multi_valued_attributes;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -141,6 +145,7 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
     case 7: return marks;
     case 8: return measures;
     case 9: return additional_info;
+    case 10: return multi_valued_attributes;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -159,6 +164,7 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
     case 7: marks = (java.util.List<java.lang.CharSequence>)value$; break;
     case 8: measures = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure>)value$; break;
     case 9: additional_info = (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>)value$; break;
+    case 10: multi_valued_attributes = (java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -344,6 +350,24 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
+   * Gets the value of the 'multi_valued_attributes' field.
+   * @return List of multi_valued_attributes of the item
+   */
+  public java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> getMultiValuedAttributes() {
+    return multi_valued_attributes;
+  }
+
+
+  /**
+   * Sets the value of the 'multi_valued_attributes' field.
+   * List of multi_valued_attributes of the item
+   * @param value the value to set.
+   */
+  public void setMultiValuedAttributes(java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> value) {
+    this.multi_valued_attributes = value;
+  }
+
+  /**
    * Creates a new Item RecordBuilder.
    * @return A new Item RecordBuilder
    */
@@ -404,6 +428,8 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
     private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure> measures;
     /** Optional with dynamic additional information. */
     private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info;
+    /** List of multi_valued_attributes of the item */
+    private java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> multi_valued_attributes;
 
     /** Creates a new Builder */
     private Builder() {
@@ -456,6 +482,10 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
         this.additional_info = data().deepCopy(fields()[9].schema(), other.additional_info);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
+      if (isValidValue(fields()[10], other.multi_valued_attributes)) {
+        this.multi_valued_attributes = data().deepCopy(fields()[10].schema(), other.multi_valued_attributes);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
     }
 
     /**
@@ -503,6 +533,10 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
       if (isValidValue(fields()[9], other.additional_info)) {
         this.additional_info = data().deepCopy(fields()[9].schema(), other.additional_info);
         fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.multi_valued_attributes)) {
+        this.multi_valued_attributes = data().deepCopy(fields()[10].schema(), other.multi_valued_attributes);
+        fieldSetFlags()[10] = true;
       }
     }
 
@@ -943,6 +977,50 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /**
+      * Gets the value of the 'multi_valued_attributes' field.
+      * List of multi_valued_attributes of the item
+      * @return The value.
+      */
+    public java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> getMultiValuedAttributes() {
+      return multi_valued_attributes;
+    }
+
+
+    /**
+      * Sets the value of the 'multi_valued_attributes' field.
+      * List of multi_valued_attributes of the item
+      * @param value The value of 'multi_valued_attributes'.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.Item.Builder setMultiValuedAttributes(java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> value) {
+      validate(fields()[10], value);
+      this.multi_valued_attributes = value;
+      fieldSetFlags()[10] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'multi_valued_attributes' field has been set.
+      * List of multi_valued_attributes of the item
+      * @return True if the 'multi_valued_attributes' field has been set, false otherwise.
+      */
+    public boolean hasMultiValuedAttributes() {
+      return fieldSetFlags()[10];
+    }
+
+
+    /**
+      * Clears the value of the 'multi_valued_attributes' field.
+      * List of multi_valued_attributes of the item
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.Item.Builder clearMultiValuedAttributes() {
+      multi_valued_attributes = null;
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Item build() {
@@ -958,6 +1036,7 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
         record.marks = fieldSetFlags()[7] ? this.marks : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[7]);
         record.measures = fieldSetFlags()[8] ? this.measures : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Measure>) defaultValue(fields()[8]);
         record.additional_info = fieldSetFlags()[9] ? this.additional_info : (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>) defaultValue(fields()[9]);
+        record.multi_valued_attributes = fieldSetFlags()[10] ? this.multi_valued_attributes : (java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute>) defaultValue(fields()[10]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1069,6 +1148,27 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
       throw new java.util.ConcurrentModificationException("Map-size written was " + size2 + ", but element count was " + actualSize2 + ".");
     }
 
+    if (this.multi_valued_attributes == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size3 = this.multi_valued_attributes.size();
+      out.writeMapStart();
+      out.setItemCount(size3);
+      long actualSize3 = 0;
+      for (java.util.Map.Entry<java.lang.CharSequence, com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> e3: this.multi_valued_attributes.entrySet()) {
+        actualSize3++;
+        out.startItem();
+        out.writeString(e3.getKey());
+        com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute v3 = e3.getValue();
+        v3.customEncode(out);
+      }
+      out.writeMapEnd();
+      if (actualSize3 != size3)
+      throw new java.util.ConcurrentModificationException("Map-size written was " + size3 + ", but element count was " + actualSize3 + ".");
+    }
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -1159,8 +1259,32 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
         }
       }
 
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.multi_valued_attributes = null;
+      } else {
+        long size3 = in.readMapStart();
+        java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> m3 = this.multi_valued_attributes; // Need fresh name due to limitation of macro system
+        if (m3 == null) {
+          m3 = new java.util.HashMap<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute>((int)size3);
+          this.multi_valued_attributes = m3;
+        } else m3.clear();
+        for ( ; 0 < size3; size3 = in.mapNext()) {
+          for ( ; size3 != 0; size3--) {
+            java.lang.CharSequence k3 = null;
+            k3 = in.readString(k3 instanceof Utf8 ? (Utf8)k3 : null);
+            com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute v3 = null;
+            if (v3 == null) {
+              v3 = new com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute();
+            }
+            v3.customDecode(in);
+            m3.put(k3, v3);
+          }
+        }
+      }
+
     } else {
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 11; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.item_id = in.readLong();
@@ -1260,6 +1384,32 @@ public class Item extends org.apache.avro.specific.SpecificRecordBase implements
                 java.lang.CharSequence v2 = null;
                 v2 = in.readString(v2 instanceof Utf8 ? (Utf8)v2 : null);
                 m2.put(k2, v2);
+              }
+            }
+          }
+          break;
+
+        case 10:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.multi_valued_attributes = null;
+          } else {
+            long size3 = in.readMapStart();
+            java.util.Map<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute> m3 = this.multi_valued_attributes; // Need fresh name due to limitation of macro system
+            if (m3 == null) {
+              m3 = new java.util.HashMap<java.lang.CharSequence,com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute>((int)size3);
+              this.multi_valued_attributes = m3;
+            } else m3.clear();
+            for ( ; 0 < size3; size3 = in.mapNext()) {
+              for ( ; size3 != 0; size3--) {
+                java.lang.CharSequence k3 = null;
+                k3 = in.readString(k3 instanceof Utf8 ? (Utf8)k3 : null);
+                com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute v3 = null;
+                if (v3 == null) {
+                  v3 = new com.inditex.mecc.mecprwat.api.avro.v2.MultiValuedAttribute();
+                }
+                v3.customDecode(in);
+                m3.put(k3, v3);
               }
             }
           }

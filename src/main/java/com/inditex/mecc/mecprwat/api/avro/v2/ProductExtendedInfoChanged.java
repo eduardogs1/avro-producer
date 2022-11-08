@@ -15,8 +15,8 @@ import org.apache.avro.message.SchemaStore;
 /** Class that holds the extended information that has changed for a Product. Products contains all associated colors and sizes. */
 @org.apache.avro.specific.AvroGenerated
 public class ProductExtendedInfoChanged extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6752890785829819837L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductExtendedInfoChanged\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds the extended information that has changed for a Product. Products contains all associated colors and sizes.\",\"fields\":[{\"name\":\"store_id\",\"type\":\"long\",\"doc\":\"Store's unique identifier.\"},{\"name\":\"commercial_component_id\",\"type\":\"long\",\"doc\":\"Commercial component's unique identifier.\"},{\"name\":\"updated_at\",\"type\":\"long\",\"doc\":\"Event's date in microseconds.\",\"logicalType\":\"timestamp-micros\"},{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"I18NText\",\"doc\":\"Class that holds a text and its locale ISO code.\",\"fields\":[{\"name\":\"iso_code\",\"type\":\"string\",\"doc\":\"Locale ISO code.\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"Internationalized text.\"}]}},\"doc\":\"Product's name in a bunch of locales.\",\"default\":[]},{\"name\":\"short_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's short description in a bunch of locales.\",\"default\":[]},{\"name\":\"long_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's long description in a bunch of locales.\",\"default\":[]},{\"name\":\"size_fit_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's description of particularities about the sizes in a bunch of locales.\",\"default\":[]},{\"name\":\"colors\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ProductColor\",\"doc\":\"Class that holds color information such names and identifier.\",\"fields\":[{\"name\":\"color_id\",\"type\":\"string\",\"doc\":\"Color's identifier.\"},{\"name\":\"color_names\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Color's name in a bunch of locales.\",\"default\":[]},{\"name\":\"gammas\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"GammaDesc\",\"doc\":\"Class that holds gamma's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Gamma's identifier.\"},{\"name\":\"gamma_name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]}]}},\"doc\":\"List of color gammas.\",\"default\":[]},{\"name\":\"sizes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Size\",\"doc\":\"Class that holds size's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Size's identifier.\"},{\"name\":\"size_name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]},{\"name\":\"position\",\"type\":\"int\",\"doc\":\"Occupied position in the size list.\"},{\"name\":\"equivalent_id\",\"type\":\"int\",\"doc\":\"Equivalent to size identifier but support multiples sizes for the same sku.\"},{\"name\":\"size_fit\",\"type\":\"string\",\"doc\":\"Indicate particularities about the size\"},{\"name\":\"size_value\",\"type\":[\"null\",\"string\"],\"doc\":\"Indicates size value description\",\"default\":null},{\"name\":\"size_short_description\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's short description in a bunch of locales.\",\"default\":[]}]}},\"doc\":\"List of sizes for the given color.\",\"default\":[]}]}},\"doc\":\"List of colors for the given product.\"},{\"name\":\"compositions\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Composition\",\"doc\":\"Class that holds an array with composition's info for all available languages on a given store and filtered by affected color_ids.\",\"fields\":[{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized composition's info json.\",\"default\":[]},{\"name\":\"color_ids\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Identifiers of colors affected.\",\"default\":[]}]}},\"doc\":\"List of internationalized composition descriptions by colors.\",\"default\":[]},{\"name\":\"cares\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Care\",\"doc\":\"Holds data of a single care and the colors where this care is used.\",\"fields\":[{\"name\":\"care_id\",\"type\":\"long\",\"doc\":\"Care identifier.\"},{\"name\":\"name\",\"type\":\"string\",\"doc\":\"Defines the standard icon to represent the case.\"},{\"name\":\"care_type\",\"type\":\"long\",\"doc\":\"Care type identifier.\"},{\"name\":\"descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Contains internationalized care description.\",\"default\":[]},{\"name\":\"color_ids\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Identifiers of affected colors.\",\"default\":[]}]}},\"doc\":\"List of internationalized cares by colors.\",\"default\":[]},{\"name\":\"seo_info\",\"type\":{\"type\":\"record\",\"name\":\"SeoInfo\",\"doc\":\"Class that holds SEO information.\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"SEO identifier.\"},{\"name\":\"keywords\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Optional list of internationalized SEO keywords.\",\"default\":[]}]},\"doc\":\"Product's SEO information object.\"},{\"name\":\"tags\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Tag\",\"doc\":\"Class that holds a tag (identifier and type) translated in all available languages.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized tags.\",\"default\":[]},{\"name\":\"identifier\",\"type\":\"string\",\"doc\":\"Indicates the identifier of the tag C-SRA-PARKA, C-NNO-BASICO, C-SRA-ABRIGOS-TRENCH...\"},{\"name\":\"type\",\"type\":\"string\",\"doc\":\"Indicates the type of tag (XGENFILTER, XCATFILTER).\"}]}},\"doc\":\"List of internationalized tags.\",\"default\":[]},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Label\",\"doc\":\"Class that represents a business label (for instance: new, ...) translated in all available languages.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized label name.\",\"default\":[]},{\"name\":\"type\",\"type\":{\"type\":\"record\",\"name\":\"LabelType\",\"doc\":\"Class that represents a type of label.\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"Label's type identifier.\"}]},\"doc\":\"Related label's type.\"}]}},\"doc\":\"List of internationalized labels.\",\"default\":[]},{\"name\":\"marks\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Marks for the single component (ZARA_SCENES...)\",\"default\":[]},{\"name\":\"valued_attributes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ValuedAttribute\",\"doc\":\"Class that represents a valued attribute and, if translated, its translations.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized attribute name.\",\"default\":[]},{\"name\":\"identifier\",\"type\":\"string\",\"doc\":\"Indicates the identifier of the attribute\"},{\"name\":\"value\",\"type\":\"string\",\"doc\":\"Indicates the value of the attribute\"}]}},\"doc\":\"List of valued_attributes of the single component\",\"default\":[]},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null}]}");
+  private static final long serialVersionUID = -7027646600777417204L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductExtendedInfoChanged\",\"namespace\":\"com.inditex.mecc.mecprwat.api.avro.v2\",\"doc\":\"Class that holds the extended information that has changed for a Product. Products contains all associated colors and sizes.\",\"fields\":[{\"name\":\"store_id\",\"type\":\"long\",\"doc\":\"Store's unique identifier.\"},{\"name\":\"commercial_component_id\",\"type\":\"long\",\"doc\":\"Commercial component's unique identifier.\"},{\"name\":\"updated_at\",\"type\":\"long\",\"doc\":\"Event's date in microseconds.\",\"logicalType\":\"timestamp-micros\"},{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"I18NText\",\"doc\":\"Class that holds a text and its locale ISO code.\",\"fields\":[{\"name\":\"iso_code\",\"type\":\"string\",\"doc\":\"Locale ISO code.\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"Internationalized text.\"}]}},\"doc\":\"Product's name in a bunch of locales.\",\"default\":[]},{\"name\":\"short_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's short description in a bunch of locales.\",\"default\":[]},{\"name\":\"long_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's long description in a bunch of locales.\",\"default\":[]},{\"name\":\"size_fit_descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Product's description of particularities about the sizes in a bunch of locales.\",\"default\":[]},{\"name\":\"colors\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ProductColor\",\"doc\":\"Class that holds color information such names and identifier.\",\"fields\":[{\"name\":\"color_id\",\"type\":\"string\",\"doc\":\"Color's identifier.\"},{\"name\":\"color_names\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Color's name in a bunch of locales.\",\"default\":[]},{\"name\":\"gammas\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"GammaDesc\",\"doc\":\"Class that holds gamma's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Gamma's identifier.\"},{\"name\":\"gamma_name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]}]}},\"doc\":\"List of color gammas.\",\"default\":[]},{\"name\":\"sizes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Size\",\"doc\":\"Class that holds size's information.\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Size's identifier.\"},{\"name\":\"size_name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's name in a bunch of locales.\",\"default\":[]},{\"name\":\"position\",\"type\":\"int\",\"doc\":\"Occupied position in the size list.\"},{\"name\":\"equivalent_id\",\"type\":\"int\",\"doc\":\"Equivalent to size identifier but support multiples sizes for the same sku.\"},{\"name\":\"size_fit\",\"type\":\"string\",\"doc\":\"Indicate particularities about the size\"},{\"name\":\"size_value\",\"type\":[\"null\",\"string\"],\"doc\":\"Indicates size value description\",\"default\":null},{\"name\":\"size_short_description\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Size's short description in a bunch of locales.\",\"default\":[]},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ExtendedInfoItem\",\"doc\":\"Class that holds item's information.\",\"fields\":[{\"name\":\"item_id\",\"type\":\"long\",\"doc\":\"Item's identifier.\"},{\"name\":\"item_composition_id\",\"type\":[\"null\",\"long\"],\"doc\":\"Id of the item composition\",\"default\":null},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null}]}},\"doc\":\"All the items that belong to this size. (Sometimes a color-size can have more than one item because of 'hermanados')\",\"default\":[]}]}},\"doc\":\"List of sizes for the given color.\",\"default\":[]}]}},\"doc\":\"List of colors for the given product.\"},{\"name\":\"compositions\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Composition\",\"doc\":\"Class that holds an array with composition's info for all available languages on a given store and filtered by affected color_ids.\",\"fields\":[{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized composition's info json.\",\"default\":[]},{\"name\":\"color_ids\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Identifiers of colors affected.\",\"default\":[]}]}},\"doc\":\"List of internationalized composition descriptions by colors.\",\"default\":[]},{\"name\":\"cares\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Care\",\"doc\":\"Holds data of a single care and the colors where this care is used.\",\"fields\":[{\"name\":\"care_id\",\"type\":\"long\",\"doc\":\"Care identifier.\"},{\"name\":\"name\",\"type\":\"string\",\"doc\":\"Defines the standard icon to represent the case.\"},{\"name\":\"care_type\",\"type\":\"long\",\"doc\":\"Care type identifier.\"},{\"name\":\"descriptions\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Contains internationalized care description.\",\"default\":[]},{\"name\":\"color_ids\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Identifiers of affected colors.\",\"default\":[]}]}},\"doc\":\"List of internationalized cares by colors.\",\"default\":[]},{\"name\":\"seo_info\",\"type\":{\"type\":\"record\",\"name\":\"SeoInfo\",\"doc\":\"Class that holds SEO information.\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"SEO identifier.\"},{\"name\":\"keywords\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Optional list of internationalized SEO keywords.\",\"default\":[]}]},\"doc\":\"Product's SEO information object.\"},{\"name\":\"tags\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Tag\",\"doc\":\"Class that holds a tag (identifier and type) translated in all available languages.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized tags.\",\"default\":[]},{\"name\":\"identifier\",\"type\":\"string\",\"doc\":\"Indicates the identifier of the tag C-SRA-PARKA, C-NNO-BASICO, C-SRA-ABRIGOS-TRENCH...\"},{\"name\":\"type\",\"type\":\"string\",\"doc\":\"Indicates the type of tag (XGENFILTER, XCATFILTER).\"}]}},\"doc\":\"List of internationalized tags.\",\"default\":[]},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Label\",\"doc\":\"Class that represents a business label (for instance: new, ...) translated in all available languages.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized label name.\",\"default\":[]},{\"name\":\"type\",\"type\":{\"type\":\"record\",\"name\":\"LabelType\",\"doc\":\"Class that represents a type of label.\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"Label's type identifier.\"}]},\"doc\":\"Related label's type.\"}]}},\"doc\":\"List of internationalized labels.\",\"default\":[]},{\"name\":\"marks\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"Marks for the single component (ZARA_SCENES...)\",\"default\":[]},{\"name\":\"valued_attributes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ValuedAttribute\",\"doc\":\"Class that represents a valued attribute and, if translated, its translations.\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized attribute name.\",\"default\":[]},{\"name\":\"identifier\",\"type\":\"string\",\"doc\":\"Indicates the identifier of the attribute\"},{\"name\":\"value\",\"type\":\"string\",\"doc\":\"Indicates the value of the attribute\"}]}},\"doc\":\"List of valued_attributes of the single component\",\"default\":[]},{\"name\":\"additional_info\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\",\"default\":{}}],\"doc\":\"Optional with dynamic additional information.\",\"default\":null},{\"name\":\"item_compositions\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ItemComposition\",\"doc\":\"Class that holds an array with composition's info for all available languages on a given store for a specific model-quality reference\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"doc\":\"Id of the item composition\"},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":\"I18NText\"},\"doc\":\"Internationalized composition's info json.\",\"default\":[]}]}},\"doc\":\"List of all the product items internationalized compositions by id.\",\"default\":[]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -104,6 +104,8 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
   @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute> valued_attributes;
   /** Optional with dynamic additional information. */
   @Deprecated public java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info;
+  /** List of all the product items internationalized compositions by id. */
+  @Deprecated public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> item_compositions;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -130,8 +132,9 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
    * @param marks Marks for the single component (ZARA_SCENES...)
    * @param valued_attributes List of valued_attributes of the single component
    * @param additional_info Optional with dynamic additional information.
+   * @param item_compositions List of all the product items internationalized compositions by id.
    */
-  public ProductExtendedInfoChanged(java.lang.Long store_id, java.lang.Long commercial_component_id, java.lang.Long updated_at, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> name, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> short_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> long_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_fit_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ProductColor> colors, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Composition> compositions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Care> cares, com.inditex.mecc.mecprwat.api.avro.v2.SeoInfo seo_info, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Tag> tags, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Label> labels, java.util.List<java.lang.CharSequence> marks, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute> valued_attributes, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info) {
+  public ProductExtendedInfoChanged(java.lang.Long store_id, java.lang.Long commercial_component_id, java.lang.Long updated_at, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> name, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> short_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> long_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.I18NText> size_fit_descriptions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ProductColor> colors, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Composition> compositions, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Care> cares, com.inditex.mecc.mecprwat.api.avro.v2.SeoInfo seo_info, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Tag> tags, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.Label> labels, java.util.List<java.lang.CharSequence> marks, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute> valued_attributes, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info, java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> item_compositions) {
     this.store_id = store_id;
     this.commercial_component_id = commercial_component_id;
     this.updated_at = updated_at;
@@ -148,6 +151,7 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
     this.marks = marks;
     this.valued_attributes = valued_attributes;
     this.additional_info = additional_info;
+    this.item_compositions = item_compositions;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -171,6 +175,7 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
     case 13: return marks;
     case 14: return valued_attributes;
     case 15: return additional_info;
+    case 16: return item_compositions;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -195,6 +200,7 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
     case 13: marks = (java.util.List<java.lang.CharSequence>)value$; break;
     case 14: valued_attributes = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute>)value$; break;
     case 15: additional_info = (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>)value$; break;
+    case 16: item_compositions = (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -488,6 +494,24 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
   }
 
   /**
+   * Gets the value of the 'item_compositions' field.
+   * @return List of all the product items internationalized compositions by id.
+   */
+  public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> getItemCompositions() {
+    return item_compositions;
+  }
+
+
+  /**
+   * Sets the value of the 'item_compositions' field.
+   * List of all the product items internationalized compositions by id.
+   * @param value the value to set.
+   */
+  public void setItemCompositions(java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> value) {
+    this.item_compositions = value;
+  }
+
+  /**
    * Creates a new ProductExtendedInfoChanged RecordBuilder.
    * @return A new ProductExtendedInfoChanged RecordBuilder
    */
@@ -561,6 +585,8 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
     private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute> valued_attributes;
     /** Optional with dynamic additional information. */
     private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> additional_info;
+    /** List of all the product items internationalized compositions by id. */
+    private java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> item_compositions;
 
     /** Creates a new Builder */
     private Builder() {
@@ -640,6 +666,10 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
         this.additional_info = data().deepCopy(fields()[15].schema(), other.additional_info);
         fieldSetFlags()[15] = other.fieldSetFlags()[15];
       }
+      if (isValidValue(fields()[16], other.item_compositions)) {
+        this.item_compositions = data().deepCopy(fields()[16].schema(), other.item_compositions);
+        fieldSetFlags()[16] = other.fieldSetFlags()[16];
+      }
     }
 
     /**
@@ -712,6 +742,10 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
       if (isValidValue(fields()[15], other.additional_info)) {
         this.additional_info = data().deepCopy(fields()[15].schema(), other.additional_info);
         fieldSetFlags()[15] = true;
+      }
+      if (isValidValue(fields()[16], other.item_compositions)) {
+        this.item_compositions = data().deepCopy(fields()[16].schema(), other.item_compositions);
+        fieldSetFlags()[16] = true;
       }
     }
 
@@ -1454,6 +1488,50 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
       return this;
     }
 
+    /**
+      * Gets the value of the 'item_compositions' field.
+      * List of all the product items internationalized compositions by id.
+      * @return The value.
+      */
+    public java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> getItemCompositions() {
+      return item_compositions;
+    }
+
+
+    /**
+      * Sets the value of the 'item_compositions' field.
+      * List of all the product items internationalized compositions by id.
+      * @param value The value of 'item_compositions'.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.ProductExtendedInfoChanged.Builder setItemCompositions(java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> value) {
+      validate(fields()[16], value);
+      this.item_compositions = value;
+      fieldSetFlags()[16] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'item_compositions' field has been set.
+      * List of all the product items internationalized compositions by id.
+      * @return True if the 'item_compositions' field has been set, false otherwise.
+      */
+    public boolean hasItemCompositions() {
+      return fieldSetFlags()[16];
+    }
+
+
+    /**
+      * Clears the value of the 'item_compositions' field.
+      * List of all the product items internationalized compositions by id.
+      * @return This builder.
+      */
+    public com.inditex.mecc.mecprwat.api.avro.v2.ProductExtendedInfoChanged.Builder clearItemCompositions() {
+      item_compositions = null;
+      fieldSetFlags()[16] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public ProductExtendedInfoChanged build() {
@@ -1484,6 +1562,7 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
         record.marks = fieldSetFlags()[13] ? this.marks : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[13]);
         record.valued_attributes = fieldSetFlags()[14] ? this.valued_attributes : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ValuedAttribute>) defaultValue(fields()[14]);
         record.additional_info = fieldSetFlags()[15] ? this.additional_info : (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>) defaultValue(fields()[15]);
+        record.item_compositions = fieldSetFlags()[16] ? this.item_compositions : (java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>) defaultValue(fields()[16]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1687,6 +1766,19 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
       if (actualSize11 != size11)
       throw new java.util.ConcurrentModificationException("Map-size written was " + size11 + ", but element count was " + actualSize11 + ".");
     }
+
+    long size12 = this.item_compositions.size();
+    out.writeArrayStart();
+    out.setItemCount(size12);
+    long actualSize12 = 0;
+    for (com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition e12: this.item_compositions) {
+      actualSize12++;
+      out.startItem();
+      e12.customEncode(out);
+    }
+    out.writeArrayEnd();
+    if (actualSize12 != size12)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size12 + ", but element count was " + actualSize12 + ".");
 
   }
 
@@ -1922,8 +2014,26 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
         }
       }
 
+      long size12 = in.readArrayStart();
+      java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> a12 = this.item_compositions;
+      if (a12 == null) {
+        a12 = new SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>((int)size12, SCHEMA$.getField("item_compositions").schema());
+        this.item_compositions = a12;
+      } else a12.clear();
+      SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> ga12 = (a12 instanceof SpecificData.Array ? (SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>)a12 : null);
+      for ( ; 0 < size12; size12 = in.arrayNext()) {
+        for ( ; size12 != 0; size12--) {
+          com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition e12 = (ga12 != null ? ga12.peek() : null);
+          if (e12 == null) {
+            e12 = new com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition();
+          }
+          e12.customDecode(in);
+          a12.add(e12);
+        }
+      }
+
     } else {
-      for (int i = 0; i < 16; i++) {
+      for (int i = 0; i < 17; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.store_id = in.readLong();
@@ -2180,6 +2290,26 @@ public class ProductExtendedInfoChanged extends org.apache.avro.specific.Specifi
                 v11 = in.readString(v11 instanceof Utf8 ? (Utf8)v11 : null);
                 m11.put(k11, v11);
               }
+            }
+          }
+          break;
+
+        case 16:
+          long size12 = in.readArrayStart();
+          java.util.List<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> a12 = this.item_compositions;
+          if (a12 == null) {
+            a12 = new SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>((int)size12, SCHEMA$.getField("item_compositions").schema());
+            this.item_compositions = a12;
+          } else a12.clear();
+          SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition> ga12 = (a12 instanceof SpecificData.Array ? (SpecificData.Array<com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition>)a12 : null);
+          for ( ; 0 < size12; size12 = in.arrayNext()) {
+            for ( ; size12 != 0; size12--) {
+              com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition e12 = (ga12 != null ? ga12.peek() : null);
+              if (e12 == null) {
+                e12 = new com.inditex.mecc.mecprwat.api.avro.v2.ItemComposition();
+              }
+              e12.customDecode(in);
+              a12.add(e12);
             }
           }
           break;

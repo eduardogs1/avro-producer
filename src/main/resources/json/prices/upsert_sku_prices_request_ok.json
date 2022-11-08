@@ -1,0 +1,54 @@
+{
+  "country_iso": "IT",
+  "ecommerce_trade_pos_info": {
+    "member_id": 7000000000000000555,
+    "name": "ZARA_IT ProductsPriceList",
+    "tradeposcn_id": 10554
+  },
+  "online_store_Code": "ZARA_IT",
+  "online_store_id": 10704,
+  "reference": {
+    "bar_code": "0116533680001",
+    "brand_id": 1,
+    "color": "800",
+    "model": "1165",
+    "quality": "336",
+    "size": "01",
+    "type": "0"
+  },
+  "time_line_prices": [
+      {
+        "end_date": 1656687720000,
+        "observation": {
+          "description": "Temporada",
+          "kind": "REGULAR"
+        },
+        "price_list": [
+            {
+              "compare_price": 2595,
+              "currency_exponent": 2,
+              "currency_iso": "EUR",
+              "price": 1595
+            }
+          ],
+        "start_date": 1654207200000
+      },
+      {
+        "end_date": 1668985200000,
+        "observation": {
+          "description": "Rebajas",
+          "kind": "SALES"
+        },
+        "price_list": [
+            {
+              "compare_price": 1595,
+              "currency_exponent": 2,
+              "currency_iso": "EUR",
+              "price": 795
+            }
+          ],
+        "start_date": 1656687720000
+      }
+    ],
+  "updated_at": 1656493622734
+}

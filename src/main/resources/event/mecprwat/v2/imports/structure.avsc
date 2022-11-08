@@ -1,0 +1,236 @@
+[
+ {"name": "ProductFamily",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds product family.",
+          "fields": [
+            {"name": "family_id", "type": "long", "doc": "Id of generic family associated to the product."},
+            {"name": "family_name", "type": "string", "doc": "Product family, e.g., shirts, trousers."},
+            {"name": "family_code", "type": "long", "doc": "AS400 family code the product belongs to."},
+            {"name": "family_name_translations", "doc": "List of all internationalized family's name. Although this is an internationalization, this field doesn't depend on the store, because all internationalized names are retrieved (whathever its store is)", "type": {"type": "array", "items": "I18NText"}, "default": []}
+          ]
+        },
+        {"name": "ProductSubfamily",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds product subfamily.",
+          "fields": [
+            {"name": "subfamily_id", "type": "long", "doc": "Id of the subfamily the product belongs."},
+            {"name": "subfamily_name", "type": "string", "doc": "Product subfamily, e.g. trousers-jeans."},
+            {"name": "subfamily_code", "type": "long", "doc": "AS400 subfamily code the product belongs to."},
+            {"name": "subfamily_name_translations", "doc": "List of all internationalized subfamily's name. Although this is an internationalization, this field doesn't depend on the store, because all internationalized names are retrieved (whathever its store is)", "type": {"type": "array", "items": "I18NText"}, "default": []}
+          ]
+        },
+        {"name": "ProductSection",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds product section.",
+          "fields": [
+            {"name": "section_id", "type": "long", "doc": "Section id of product, e.g., 1: woman, 2: man, 3: kid."},
+            {"name": "section_name", "type": "string", "doc": "Product section (e.g. man, woman, etc)."}
+          ]
+        },
+        {"name": "ProductBrand",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds product brand.",
+          "fields": [
+            {"name": "brand_id", "type": "long", "doc": "Brand identifier, e.g., 1: Zara, 16: Zara Sur, 18: Uterque."},
+            {"name": "brand_group_id", "type": "long", "doc": "Brand group id, e.g., 1: ZARA: , 2: PULL_AND_BEAR."},
+            {"name": "brand_group_name", "type": "string", "doc": "Brand group name, e.g. ZARA: zara, PULL_AND_BEAR: pullandbear."}
+          ]
+        },
+        {"name": "Gamma",
+         "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+         "type": "record",
+         "doc": "Class that holds gamma information.",
+         "fields": [
+           {"name": "gamma_id", "type": "long", "doc": "Gamma id of color."},
+           {"name": "position", "type": "long", "doc": "Correlation index of the gamma."},
+           {"name": "hex_code", "type": "string", "doc": "Hexadecimal code of the gamma."}
+         ]
+        },
+        {"name": "MultiValuedAttribute",
+         "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+         "doc": "Class that represents a list of values for a multi valued attribute.",
+         "type": "record",
+         "fields": [
+           {"name": "values", "type": {"type": "array", "items": "string"}, "doc": "Indicates the values of the attribute.", "default": []}
+         ]
+        },
+        {"name": "ProductStructureChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds product structure changes.",
+          "fields": [
+            {"name": "store_id", "type": ["null","long"], "default": null, "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component unique identifier."},
+            {"name": "size_system_id", "type": "long", "doc": "Size system identifier."},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event timestamp expressed in microseconds."},
+            {"name": "is_buyable",  "type": "boolean", "doc": "Indicates whether the commercial component is buyable or not (e.g. whether front end can display its sizes or add a size to the cart)."},
+            {"name": "is_deleted", "type": "boolean", "doc": "Indicates whether this commercial component has been marked for deletion or not."},
+            {"name": "is_active_campaign", "type": ["null","boolean"], "doc": "Indicates whether this commercial component belongs to an active campaign or not."},
+            {"name": "kind",  "type": "string", "doc": "The kind of product (e.g. fragance, giftcard, virtualGiftcard, wear, marketing, unisize, multisize, group or other)"},
+            {"name": "kind_id",  "type": "string", "doc": "Legacy kind identifier."},
+            {"name": "reference",  "type": "string", "doc": "Full product reference containing model, quality and campaign."},
+            {"name": "display_reference", "type": "string", "doc": "Reference that can be displayed by front ends containing only model and quality properly formatted."},
+            {"name": "units_lot", "type": ["null","int"], "doc": "Number of units contained in a single SKU."},
+            {"name": "first_visible_date", "type": ["null", "long"], "logicalType": "timestamp-millis", "doc": "Timestamp when the product was visible for the first time."},
+            {"name": "section", "type": "ProductSection", "doc": "Section of a product."},
+            {"name": "family", "type": "ProductFamily", "doc": "Family of a product."},
+            {"name": "subfamily", "type": "ProductSubfamily", "doc": "Subfamily of a product."},
+            {"name": "brand", "type": "ProductBrand", "doc": "Brand of a product."},
+            {
+              "name": "volume",
+              "doc": "Volume of a perfume.",
+              "type": ["null",
+                {
+                  "name": "ProductVolume",
+                  "type": "record",
+                  "doc": "Class that holds info about a perfume.",
+                  "fields": [
+                    {"name": "number", "type": "int", "doc": "Cardinality of the volume (relative to the next unit)."},
+                    {"name": "unit", "type": "string", "doc": "Unit of measurement. i.e ml."}
+                  ]
+              }]
+            },
+            {"name": "customizable", "type": "boolean", "doc": "True if the component has any customization."},
+            {"name": "join_life", "type": ["null", "string"], "doc": "Join life code."},
+            {"name": "colors", "doc": "Colors contained by this product.",
+               "type": {
+                    "type": "array",
+                    "doc": "Array of colors associated to this commercial component.",
+                    "items": {
+                      "name": "ColorItem",
+                      "type": "record",
+                      "doc": "Holds colors of the commercial component.",
+                      "fields": [
+                        {"name": "color_id", "type": "string", "doc": "Child commercial component color id."},
+                        {"name": "gammas", "type": {"type": "array", "items": "Gamma"}, "default": [], "doc": "Gammas info of the color."},
+                        {"name": "items", "doc": "Items contained by this color.",
+                          "type": {
+                              "type": "array",
+                              "doc": "Array of commercial components associated to this commercial component.",
+                              "items": {
+                                "name": "Item",
+                                "type": "record",
+                                "doc": "Holds basic data of a child commercial component.",
+                                "fields": [
+                                  {"name": "item_id", "type": "long", "doc": "Child commercial component unique id."},
+                                  {"name": "size_id", "type": "long", "doc": "Child commercial component size id."},
+                                  {"name": "is_buyable", "type": "boolean", "doc": "Indicates whether the item is buyable or not."},
+                                  {"name": "reference", "type": "string", "doc": "Child commercial component partnumber."},
+                                  {"name": "hscode", "type": ["null", "long"], "default": null, "doc": "Tariff heading code used by finances."},
+                                  {"name": "country_manufacture", "type": ["null", "string"], "default": null, "doc": "Code indicating the country of manufacture"},
+                                  {"name": "join_life", "type": ["null", "string"], "doc": "Join life code."},
+                                  {"name": "marks", "type": {"type": "array", "items": "string"}, "default": [], "doc": "Marks at item level"},
+                                  {"name": "measures", "type": {"type": "array",
+                                    "items": {
+                                      "name": "Measure",
+                                      "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+                                      "doc": "Class that holds the information about an individual measure.",
+                                      "type": "record",
+                                      "fields": [
+                                        {"name": "kind", "type": "string", "doc": "Kind of measure [weight, length, width, height]"},
+                                        {"name": "unit", "type": "string", "doc": "Unit of the measure"},
+                                        {"name": "value", "type": "double", "doc": "Measure value"},
+                                        {"name": "store_id", "type": ["null", "long"], "default": null, "doc": "StoreId of the measure"}
+                                      ]
+                                    }}, "doc": "Indicates measures for an item", "default": []},
+                                  {"name": "additional_info", "type": ["null", {"type": "map", "values": "string", "default": {}}], "doc": "Optional with dynamic additional information.", "default": null},
+                                  {"name": "multi_valued_attributes", "type": ["null", {"type": "map", "values": "MultiValuedAttribute", "default": {}}], "doc": "List of multi_valued_attributes of the item", "default": null}
+                                ]
+                              }
+                          }
+                         }
+                      ]
+                    }
+               }
+            },
+            {"name": "marks", "type": {"type": "array", "items": "string"}, "doc": "Marks for the product: hasNoInteractiveSizeGuide indicates that size guide is not available", "default": []},
+            {"name": "additional_info", "type": ["null", {"type": "map", "values": "string", "default": {}}], "doc": "Optional with dynamic additional information.", "default": null}
+          ]
+        },
+        {"name": "SingleComponentStructureChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds single component (aka color bundle) structure changes.",
+          "fields": [
+            {"name": "store_id", "type": ["null","long"], "default": null, "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component unique identifier."},
+            {"name": "size_system_id", "type": "long", "doc": "Size system identifier."},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event timestamp expressed in microseconds."},
+            {"name": "is_buyable",  "type": "boolean", "doc": "Indicates whether the commercial component is buyable or not (e.g. whether front end can display its sizes or add a size to the cart)."},
+            {"name": "is_deleted", "type": "boolean", "doc": "Indicates whether this commercial component has been marked for deletion or not."},
+            {"name": "is_active_campaign", "type": "boolean", "doc": "Indicates whether this commercial component belongs to an active campaign or not."},
+            {"name": "related_product_id",  "type": "long", "doc": "Commercial component id of product associated to this single component (aka color bundle)."},
+            {"name": "color_id", "type": "string", "doc": "Color id this single component refers to on the related product."},
+            {"name": "styling_id", "type": "int", "doc": "Styling id this single component refers to on the related product."},
+            {"name": "kind", "type": "string", "doc": "The kind of product (e.g. fragance, giftcard, virtualGiftcard, wear, marketing, unisize, multisize, group or other)."},
+            {"name": "kind_id",  "type": "string", "doc": "Legacy kind identifier."},
+            {"name": "reference",  "type": "string", "doc": "Full product reference containing model, quality and campaign."},
+            {"name": "display_reference", "type": "string", "doc": "Reference that can be displayed by front ends containing only model and quality properly formatted."},
+            {"name": "units_lot", "type": ["null","int"], "doc": "Number of units contained in a single SKU."},
+            {"name": "first_visible_date", "type": ["null", "long"], "logicalType": "timestamp-millis", "doc": "Timestamp when the component was visible for the first time."},
+            {"name": "product_section", "type": "ProductSection", "doc": "Section of a product."},
+            {"name": "product_family", "type": "ProductFamily", "doc": "Family of a product."},
+            {"name": "product_subfamily", "type": "ProductSubfamily", "doc": "Subfamily of a product."},
+            {"name": "product_brand", "type": "ProductBrand", "doc": "Brand of a product."},
+            {"name": "customization_type_id", "type": ["null", "long"], "doc": "Optional customization type id for the single component"},
+            {"name": "join_life", "type": ["null", "string"], "doc": "Join life code."},
+            {"name": "colorItems", "doc": "Child commercial components associated to this commercial component.", "type": {"type": "array", "items": "ColorItem"}, "default": []},
+            {"name": "marks", "type": {"type": "array", "items": "string"}, "default": [], "doc": "Marks for the single component"},
+            {"name": "additional_info", "type": ["null", {"type": "map", "values": "string", "default": {}}], "doc": "Optional with dynamic additional information.", "default": null}
+          ]
+        },
+        {"name": "BundleComponentStructureChanged",
+          "namespace": "com.inditex.mecc.mecprwat.api.avro.v2",
+          "type": "record",
+          "doc": "Class that holds bundle component structure changes. Bundle components are made of several products.",
+          "fields": [
+            {"name": "store_id", "type": ["null","long"], "default": null, "doc": "Store's unique identifier."},
+            {"name": "commercial_component_id",  "type": "long", "doc": "Commercial component unique identifier."},
+            {"name": "updated_at", "type": "long", "logicalType": "timestamp-micros", "doc": "Event timestamp expressed in microseconds."},
+            {"name": "is_buyable",  "type": "boolean", "doc": "Indicates whether the commercial component is buyable or not (e.g. whether front end can display its sizes or add a size to the cart)."},
+            {"name": "is_deleted", "type": "boolean", "doc": "Indicates whether this commercial component has been marked for deletion or not."},
+            {"name": "is_active_campaign", "type": "boolean", "doc": "Indicates whether this commercial component belongs to an active campaign or not."},
+            {
+              "name": "bundle_component_type",
+              "doc": "Indicates the kind of bundle.",
+              "type": {
+                "name": "BundleComponentType",
+                "type": "enum",
+                "symbols": ["SUIT", "LOOK", "UNISIZE", "MULTISIZE", "GROUP", "BEAUTY", "GRUCACO"]
+              }
+            },
+            {"name": "kind",  "type": "string", "doc": "The kind of product (e.g. fragance, giftcard, virtualGiftcard, wear, marketing, unisize, multisize, group or other)."},
+            {"name": "kind_id",  "type": "string", "doc": "Legacy kind identifier."},
+            {"name": "reference",  "type": "string", "doc": "Full product reference containing model, quality and campaign."},
+            {"name": "display_reference", "type": "string", "doc": "Reference that can be displayed by front ends containing only model and quality properly formatted."},
+            {"name": "first_visible_date", "type": ["null", "long"], "logicalType": "timestamp-millis", "doc": "Timestamp when the component was visible for the first time."},
+            {"name": "color_id", "type": ["null", "string"], "doc": "Color id associated to this bundle."},
+            {"name": "styling_id", "type": ["null","int"], "doc": "Styling id associated to this bundle."},
+            {
+                "name": "bundle_product_summaries",
+                "doc": "Summary of products this bundle is made of.",
+                "type": {
+                    "type": "array",
+                    "items": {
+                        "name": "BundleProductSummary",
+                        "doc": "Summary of a product composing a commercial component bundle.",
+                        "type": "record",
+                        "fields": [
+                            {"name": "commercial_component_id", "type": "long", "doc": "Commercial component unique identifier of a product this bundle is composed of."},
+                            {"name": "color_id", "type": ["null","string"], "doc": "Color id of this product applying to the bundle."},
+                            {"name": "styling_id", "type": ["null","int"], "doc": "Styling id of this product applying to the bundle."},
+                            {"name": "is_main_component", "type": "boolean", "doc": "Indicates whether this is the main product contained in a bundle."},
+                            {"name": "colorItems", "doc": "Commercial component items associated to a bundle product summary.", "type": {"type": "array", "items": "ColorItem"}, "default": []}
+                        ]
+                    }
+                }
+            },
+            {"name": "marks", "type": {"type": "array", "items": "string"}, "default": [], "doc": "Marks for the bundle component"},
+            {"name": "additional_info", "type": ["null", {"type": "map", "values": "string", "default": {}}], "doc": "Optional with dynamic additional information.", "default": null}
+          ]
+        }
+]

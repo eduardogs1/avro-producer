@@ -11,7 +11,7 @@ public class GetRestController {
   private MessageProducer messageProducer;
 
   @GetMapping(value = "/product")
-  public String list() {
+  public String product() {
     messageProducer.sendWatcher();
     return "watcher enviado";
   }
@@ -26,6 +26,12 @@ public class GetRestController {
   public String subscription() {
     messageProducer.sendSubscription();
     return "mensaje de suscripciones enviado";
+  }
+
+  @GetMapping(value = "/prices")
+  public String prices() {
+    messageProducer.sendPrices();
+    return "mensaje de precios enviado";
   }
 
 }
